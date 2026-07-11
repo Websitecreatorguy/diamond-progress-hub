@@ -14,7 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      measurements: {
+        Row: {
+          bat_speed_mph: number | null
+          created_at: string
+          exit_velo_mph: number | null
+          height_in: number | null
+          home_to_first_sec: number | null
+          id: string
+          measured_at: string
+          notes: string | null
+          pitch_velo_mph: number | null
+          sixty_yd_sec: number | null
+          throw_velo_mph: number | null
+          user_id: string
+          weight_lb: number | null
+        }
+        Insert: {
+          bat_speed_mph?: number | null
+          created_at?: string
+          exit_velo_mph?: number | null
+          height_in?: number | null
+          home_to_first_sec?: number | null
+          id?: string
+          measured_at?: string
+          notes?: string | null
+          pitch_velo_mph?: number | null
+          sixty_yd_sec?: number | null
+          throw_velo_mph?: number | null
+          user_id: string
+          weight_lb?: number | null
+        }
+        Update: {
+          bat_speed_mph?: number | null
+          created_at?: string
+          exit_velo_mph?: number | null
+          height_in?: number | null
+          home_to_first_sec?: number | null
+          id?: string
+          measured_at?: string
+          notes?: string | null
+          pitch_velo_mph?: number | null
+          sixty_yd_sec?: number | null
+          throw_velo_mph?: number | null
+          user_id?: string
+          weight_lb?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          age: number | null
+          avatar_url: string | null
+          bats: string | null
+          created_at: string
+          full_name: string | null
+          height_in: number | null
+          id: string
+          positions: string[] | null
+          team: string | null
+          throws: string | null
+          updated_at: string
+          weight_lb: number | null
+        }
+        Insert: {
+          age?: number | null
+          avatar_url?: string | null
+          bats?: string | null
+          created_at?: string
+          full_name?: string | null
+          height_in?: number | null
+          id: string
+          positions?: string[] | null
+          team?: string | null
+          throws?: string | null
+          updated_at?: string
+          weight_lb?: number | null
+        }
+        Update: {
+          age?: number | null
+          avatar_url?: string | null
+          bats?: string | null
+          created_at?: string
+          full_name?: string | null
+          height_in?: number | null
+          id?: string
+          positions?: string[] | null
+          team?: string | null
+          throws?: string | null
+          updated_at?: string
+          weight_lb?: number | null
+        }
+        Relationships: []
+      }
+      workouts: {
+        Row: {
+          category: string
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          duration_min: number | null
+          id: string
+          notes: string | null
+          scheduled_date: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          duration_min?: number | null
+          id?: string
+          notes?: string | null
+          scheduled_date: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          duration_min?: number | null
+          id?: string
+          notes?: string | null
+          scheduled_date?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

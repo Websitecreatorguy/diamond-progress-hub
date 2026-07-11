@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { format, differenceInDays } from "date-fns";
 import { toast } from "sonner";
+import { prCelebration } from "@/lib/encouragement";
 
 export const Route = createFileRoute("/_authenticated/progress")({
   head: () => ({ meta: [{ title: "Progress Check — Diamond Development" }] }),

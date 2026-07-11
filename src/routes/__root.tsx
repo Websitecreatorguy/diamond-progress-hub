@@ -76,15 +76,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#1e40af" },
+      { title: "Diamond Development — Track your baseball progress" },
+      {
+        name: "description",
+        content:
+          "Diamond Development is a training tracker for young baseball players. Log workouts, measure velocity, and see your progress over time.",
+      },
+      { property: "og:title", content: "Diamond Development" },
+      {
+        property: "og:description",
+        content: "Track baseball training, measurements, and personal records.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

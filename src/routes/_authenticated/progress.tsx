@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { format, differenceInDays } from "date-fns";
 import { toast } from "sonner";
+import { prCelebration } from "@/lib/encouragement";
 
 export const Route = createFileRoute("/_authenticated/progress")({
   head: () => ({ meta: [{ title: "Progress Check — Diamond Development" }] }),
@@ -69,17 +70,38 @@ function ProgressCheck() {
       const { data: u } = await supabase.auth.getUser();
       if (!u.user) throw new Error("Not signed in");
       const payload: Record<string, unknown> = { user_id: u.user.id };
+      const prs: { label: string; prev: number; curr: number; unit: string }[] = [];
       METRICS.forEach((m) => {
         const v = form[m.key];
-        if (v) payload[m.key] = parseFloat(v);
+        if (!v) return;
+        const curr = parseFloat(v);
+        payload[m.key] = curr;
+        const prevBest = entries.reduce<number | null>((best, e) => {
+          const val = e[m.key] as number | null;
+          if (val == null) return best;
+          if (best == null) return val;
+          return m.lowerIsBetter ? Math.min(best, val) : Math.max(best, val);
+        }, null);
+        if (prevBest != null) {
+          const better = m.lowerIsBetter ? curr < prevBest : curr > prevBest;
+          if (better) prs.push({ label: m.label, prev: prevBest, curr, unit: m.unit });
+        }
       });
       const { error } = await supabase.from("measurements").insert(payload as never);
       if (error) throw error;
+      return prs;
     },
-    onSuccess: () => {
+    onSuccess: (prs) => {
       qc.invalidateQueries({ queryKey: ["measurements"] });
       setForm({});
-      toast.success("New personal records logged!");
+      if (prs.length === 0) {
+        toast.success("Measurements saved.");
+      } else {
+        toast.success(`🎯 ${prs.length} new personal best${prs.length > 1 ? "s" : ""}!`);
+        prs.forEach((p) =>
+          toast(`🏆 ${prCelebration(p.label, p.prev, p.curr, p.unit)}`, { duration: 6000 }),
+        );
+      }
     },
     onError: (e: Error) => toast.error(e.message),
   });

@@ -73,7 +73,7 @@ function ProgressCheck() {
         const v = form[m.key];
         if (v) payload[m.key] = parseFloat(v);
       });
-      const { error } = await supabase.from("measurements").insert(payload);
+      const { error } = await supabase.from("measurements").insert(payload as never);
       if (error) throw error;
     },
     onSuccess: () => {

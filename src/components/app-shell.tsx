@@ -4,6 +4,7 @@ import { type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { LOGO_URL } from "@/components/logo";
 
 const nav = [
   { to: "/dashboard", label: "Home", icon: Home },
@@ -26,17 +27,21 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
     <div className="min-h-screen bg-background text-foreground pb-24">
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-primary text-primary-foreground shadow-glow">
-              <span className="text-sm font-black">◆</span>
-            </div>
+          <Link to="/dashboard" className="flex items-center gap-2.5">
+            <img
+              src={LOGO_URL}
+              alt="Diamond Development"
+              width={32}
+              height={32}
+              className="rounded-lg shadow-glow"
+            />
             <div className="leading-tight">
-              <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Diamond Dev
               </div>
               <div className="text-sm font-semibold">{title}</div>
             </div>
-          </div>
+          </Link>
           <Button variant="ghost" size="icon" onClick={signOut} aria-label="Sign out">
             <LogOut className="h-4 w-4" />
           </Button>

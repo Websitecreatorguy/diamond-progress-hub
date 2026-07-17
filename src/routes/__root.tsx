@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import logoAsset from "../assets/diamond-logo.png.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -78,26 +79,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#1e40af" },
-      { title: "Diamond Development — Track your baseball progress" },
+      { title: "Diamond Development — The Baseball Development Platform" },
       {
         name: "description",
         content:
-          "Diamond Development is a training tracker for young baseball players. Log workouts, measure velocity, and see your progress over time.",
+          "Track exit velocity, pitch velocity, bat speed, and every metric that matters. The training and analytics platform built for baseball players, coaches, and parents.",
       },
-      { property: "og:title", content: "Diamond Development" },
-      {
-        property: "og:description",
-        content: "Track baseball training, measurements, and personal records.",
-      },
+      { property: "og:site_name", content: "Diamond Development" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: logoAsset.url, type: "image/png" },
+      { rel: "apple-touch-icon", href: logoAsset.url },
     ],
   }),
   shellComponent: RootShell,

@@ -82,9 +82,13 @@ function AuthPage() {
       <div className="pointer-events-none absolute inset-0 opacity-20 [background:radial-gradient(circle_at_20%_10%,white_0,transparent_40%),radial-gradient(circle_at_80%_90%,white_0,transparent_40%)]" />
       <div className="relative w-full max-w-md rounded-3xl bg-card p-8 shadow-glow">
         <div className="mb-6 flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
-            <span className="text-lg font-black">◆</span>
-          </div>
+          <img
+            src="/__l5e/assets-v1/695f4b80-cac0-406d-9f1e-7620bbbb7f69/diamond-logo.png"
+            alt="Diamond Development"
+            width={44}
+            height={44}
+            className="rounded-2xl shadow-glow"
+          />
           <div>
             <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
               Diamond Development

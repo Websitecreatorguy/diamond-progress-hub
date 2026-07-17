@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /training
+Disallow: /progress
+Disallow: /charts
+Disallow: /profile
+
+Sitemap: https://diamond-progress-hub.lovable.app/sitemap.xml

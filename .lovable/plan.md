@@ -1,61 +1,70 @@
-# Weekly Baseball Development Program
+# Diamond Development — Platform Overhaul Plan
 
-Build a complete, auto-generated 7-day training program that plugs into the existing Training page. Every athlete gets a personalized plan based on profile (age, height, weight, position) and latest measurements (exit velo, throw velo, 60yd, bat speed). The plan adapts as metrics improve.
+This is a large, multi-phase build. I'll break it into shippable phases so we make steady progress and you can steer between phases. Below is the scope with what I'll do in each phase, in order.
 
-## What we're building
+## Phase 1 — Branding, Homepage, SEO foundation
 
-### 1. Exercise & Drill Library (`src/lib/program.ts`)
-A typed catalog of every exercise/drill from the Mon–Sun spec. Each entry has:
-- `name`, `category` (Hitting / Strength / Speed / Fielding / Throwing / Recovery)
-- `baseSets`, `baseReps` (or duration/distance)
-- `technique[]` — step-by-step
-- `commonMistakes[]`
-- `coachingTips[]`
-- `safety[]`
-- `videoPlaceholder` (URL slot, empty for now)
+- Add your uploaded radar logo as a Lovable Asset. Use it in navbar, auth page, dashboard header, footer, and as the favicon (and OG image).
+- Rebuild the marketing homepage at `/` (currently just redirects). Sections: Hero, Features, Dashboard Preview, Team, Coach, Parent, Progress Tracking, FAQ, Footer. Use baseball equipment/field imagery + UI mockup screenshots — no fake people.
+- Public marketing nav: Home, Features, Teams, Leaderboards, Blog, Sign In.
+- SEO system:
+  - `src/routes/sitemap[.]xml.ts` server route driven by route registry + blog slugs.
+  - `public/robots.txt`.
+  - Per-route `head()` with title, description, canonical, og:*, twitter:*, JSON-LD.
+- Blog/Resources hub at `/resources` + individual SEO pages (MDX-free, TSX content modules) for the 21 topics you listed. Each includes H1/H2/H3, internal links, FAQ, and Article/FAQPage JSON-LD.
 
-Plus a `WEEKLY_TEMPLATE` mapping each weekday → ordered list of drill IDs matching the spec exactly (Monday lower body + hitting, Tuesday speed + fielding, etc.).
+## Phase 2 — Auth fixes
 
-### 2. Personalization engine (`src/lib/program.ts`)
-Pure function `generateWeek(profile, latestMeasurements) → DayPlan[]`:
-- **Age scaling**: <12 = 60% volume, 12–14 = 80%, 15–17 = 100%, 18+ = 110%. Caps weighted lifts for <13 (bodyweight variants only).
-- **Skill level** derived from measurements vs age-band benchmarks (Beginner / Developing / Advanced).
-- **Position filter**: pitchers get extra long toss + recovery, catchers get blocking/footwork emphasis, outfielders extra drop steps, infielders extra double-play work.
-- **Progression**: if latest exit velo / throw velo / 60yd / bat speed improved ≥5% vs 30 days ago, bump sets/reps one tier (with age cap). Downgrade on regression.
-- Output: 7 days, each with title, focus, and a list of prescribed drills (with the athlete-specific sets/reps).
+- Signup: email + password + confirm password, show/hide toggle, zod validation, clear error messages, email verification copy.
+- Forgot password flow + `/reset-password` route.
+- Fix Google OAuth redirect: use `window.location.origin` (public) as `redirect_uri`, store intended path in sessionStorage, land users on `/dashboard` after session hydrates. Add `/auth/callback` public route to resolve the 404.
+- Multi-device: audit session handling — the current `useSession` hook + Supabase client already isolate per-user; verify no shared storage keys or hard-coded IDs and add regression around `onAuthStateChange`.
 
-### 3. "Generate my week" flow
-On the Training page, add a **Generate Program** button. It:
-- Loads profile + most recent measurement.
-- Runs `generateWeek(...)`.
-- Inserts one `workouts` row per drill for the current week (skipping days already populated, or wiping the week first — user confirms via dialog).
-- Existing weekly view already renders `workouts` rows and checklist.
+## Phase 3 — Database expansion
 
-### 4. Drill detail sheet
-Clicking a workout row opens a drawer/sheet showing the full exercise instructions (technique, mistakes, tips, safety, video placeholder). Uses shadcn `Sheet`.
+One migration adding:
 
-### 5. Encouragement + milestones
-- On checkbox complete: toast with a rotating encouraging message ("Nice work — one more rep than yesterday.").
-- On week 100% complete: celebratory toast + confetti-style banner on Dashboard.
-- On new measurement PR (compared to prior best): toast "New personal best — throw velo 68 → 72 mph!" (hooks into Progress page save flow).
+- `teams`, `team_members` (role: coach/assistant/player, status: pending/approved), `team_invites` (code).
+- `announcements` (team-scoped).
+- `goals` (metric, target, deadline, progress).
+- `achievements` + `player_achievements` (auto-awarded).
+- `stat_entries` (typed metric values with `verified_by`, `verified_at` → powers Verified Stats + PRs + leaderboards).
+- `timeline_events` (joined team, PR, verified, workout, goal, badge).
+- `player_profiles_public` fields (bio, photo_url, positions, grad_year, public_slug).
+- `parent_links` (parent user → child player).
+- Full RLS + GRANTs per project rules.
 
-### 6. Weekly completion %
-Already computed on Training page — surface the same number on Dashboard as "This week."
+## Phase 4 — Player features
 
-## Technical layout
+- Enhanced dashboard: line charts for all 10 metrics, monthly delta %, PR highlights, XP/level bar.
+- Personal Records page.
+- Goals page with progress bars.
+- Achievements page.
+- Timeline page.
+- Player comparison (self-over-time, teammates, age peers, national averages baseline).
+- Public profile at `/p/[slug]` (opt-in) + recruiting profile at `/r/[slug]` with print-friendly view.
 
-```
-src/lib/program.ts              # library + generator (pure, tested-shape)
-src/lib/encouragement.ts        # message pool + milestone helpers
-src/components/drill-sheet.tsx  # exercise detail Sheet
-src/routes/_authenticated/training.tsx  # + Generate button, sheet trigger
-src/routes/_authenticated/progress.tsx  # + PR detection on save
-src/routes/_authenticated/dashboard.tsx # + week % + latest milestone
-```
+## Phase 5 — Teams, Coach, Parent
 
-No schema changes — everything fits current `workouts` / `measurements` / `profiles` tables. The generated drills persist as normal `workouts` rows, so the existing checklist, completion %, and progression tracking Just Work.
+- Team pages: create/join with invite code, roster, announcements, leaderboards (per metric, all vs verified-only), stats.
+- Coach dashboard: approve players, verify stats (adds badge), assign workouts, announcements, attendance, CSV export.
+- Parent dashboard: link children, switch active player.
 
-## Notes for you
-- Instructions live in code (not the DB) so they're free to display, easy to edit, and load instantly.
-- Video URLs are left as placeholders you can fill in later per drill.
-- Progression is conservative and age-capped — safety reminders always render in the drill sheet.
+## Phase 6 — Polish, performance, QA
+
+- Image lazy loading, route-level code splitting review, Query cache tuning.
+- Full pass for 404s, responsive breakpoints, a11y (labels, focus states, contrast).
+- Lighthouse pass targeting 95+.
+
+## Technical notes
+
+- Stack: TanStack Start + Supabase (Lovable Cloud). Marketing/blog/SEO routes public (top-level), app routes under `_authenticated/`.
+- Charts: existing `recharts` v2.
+- All SEO content pages are TSX with a shared `<ArticleLayout>` component so the design stays consistent and Lighthouse-friendly.
+- I'll use the uploaded logo via `lovable-assets` (no binary in repo).
+
+## Delivery
+
+I'll deliver **Phase 1 first** in the next turn (branding, homepage, SEO foundation, first batch of blog/SEO pages). After you see it, I'll continue through Phases 2→6. Each phase is a self-contained shippable increment.
+
+Reply "go" to proceed with Phase 1, or tell me to reorder/drop anything.

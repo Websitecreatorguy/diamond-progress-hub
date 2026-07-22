@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { ARTICLES } from "@/lib/resources";
+import { TOP_LEVEL_ARTICLE_PATHS } from "@/components/article-view";
 import { SITE_URL } from "@/lib/seo";
 
 interface Entry {
@@ -20,15 +21,32 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/teams", changefreq: "monthly", priority: "0.8" },
           { path: "/leaderboards", changefreq: "monthly", priority: "0.8" },
           { path: "/resources", changefreq: "weekly", priority: "0.9" },
+          { path: "/blog", changefreq: "weekly", priority: "0.9" },
           { path: "/auth", changefreq: "yearly", priority: "0.4" },
         ];
-        const articleEntries: Entry[] = ARTICLES.map((a) => ({
+        // Top-level canonical article URLs
+        const topLevelEntries: Entry[] = Object.entries(TOP_LEVEL_ARTICLE_PATHS).map(
+          ([slug, path]) => {
+            const a = ARTICLES.find((x) => x.slug === slug);
+            return {
+              path,
+              changefreq: "monthly",
+              priority: "0.85",
+              lastmod: a?.updated,
+            };
+          },
+        );
+        // /resources/[slug] pages that don't have a top-level canonical
+        const articleEntries: Entry[] = ARTICLES.filter(
+          (a) => !TOP_LEVEL_ARTICLE_PATHS[a.slug],
+        ).map((a) => ({
           path: `/resources/${a.slug}`,
           changefreq: "monthly",
           priority: "0.7",
           lastmod: a.updated,
         }));
-        const all = [...staticEntries, ...articleEntries];
+
+        const all = [...staticEntries, ...topLevelEntries, ...articleEntries];
 
         const urls = all.map((e) =>
           [

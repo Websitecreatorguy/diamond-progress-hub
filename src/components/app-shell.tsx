@@ -4,7 +4,7 @@ import { type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { LOGO_URL } from "@/components/logo";
+import { Logo } from "@/components/logo";
 
 const nav = [
   { to: "/dashboard", label: "Home", icon: Home },
@@ -25,16 +25,10 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-24">
-      <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
-          <Link to="/dashboard" className="flex items-center gap-2.5">
-            <img
-              src={LOGO_URL}
-              alt="Diamond Development"
-              width={32}
-              height={32}
-              className="rounded-lg shadow-glow"
-            />
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6">
+          <Link to="/dashboard" className="flex items-center gap-3">
+            <Logo size={34} showWordmark={false} />
             <div className="leading-tight">
               <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Diamond Dev
@@ -48,9 +42,9 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-4 pt-4">{children}</main>
+      <main className="mx-auto max-w-3xl px-4 pt-4 sm:px-6">{children}</main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur">
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 backdrop-blur-md">
         <div className="mx-auto grid max-w-3xl grid-cols-5">
           {nav.map(({ to, label, icon: Icon }) => {
             const active = pathname.startsWith(to);

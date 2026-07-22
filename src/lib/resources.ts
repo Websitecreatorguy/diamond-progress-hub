@@ -627,6 +627,94 @@ export const ARTICLES: Article[] = [
     ],
     related: ["baseball-development-guide"],
   },
+  {
+    slug: "how-to-increase-exit-velocity",
+    title: "How to Increase Exit Velocity — Diamond Development",
+    h1: "How to Increase Exit Velocity",
+    description:
+      "The three levers that reliably add exit velocity — bat speed, strength, and barrel accuracy — and a 6-week plan you can start today.",
+    category: "Training",
+    readMinutes: 7,
+    updated: UPDATED,
+    intro:
+      "Exit velocity is the single best predictor of hitting success at every level of baseball. The good news: it's trainable. Most hitters can add 4–8 mph over a focused 6–8 week block by attacking bat speed, lower-body strength, and barrel accuracy at the same time.",
+    sections: [
+      {
+        heading: "The three levers",
+        body: "Ignore any program that only trains one of these — you leave gains on the table.",
+        sub: [
+          { heading: "1. Bat speed", body: "Overload/underload bat training (a bat ~20% heavier and ~20% lighter than your gamer) 3x per week for 6 weeks reliably adds 3–5 mph of bat speed." },
+          { heading: "2. Lower-body strength", body: "Trap-bar deadlifts, front squats, and hip-hinge power work drive the rotational force your barrel converts to exit velo." },
+          { heading: "3. Barrel accuracy", body: "You cannot hit the ball hard if you don't hit it square. Tee and front-toss work with feedback (Blast/Diamond Kinetics or video) matters as much as brute strength." },
+        ],
+      },
+      {
+        heading: "A proven 6-week block",
+        body: "Do this alongside your normal team practice. Expect 4–8 mph added when measured on a calibrated device.",
+        sub: [
+          { heading: "Days 1, 3, 5", body: "Overload/underload bat swings (10 heavy, 10 light, 10 gamer, 3 rounds) + 30 tee swings focused on quality contact." },
+          { heading: "Days 2, 4", body: "Lower body strength: trap-bar deadlift 3x5, front squat 3x5, med-ball rotational throws 3x6 each side." },
+          { heading: "Day 6", body: "Front toss + live BP if available. Track top-5 exit velo average." },
+          { heading: "Day 7", body: "Full recovery. Sleep 9+ hours, mobility, low-key catch." },
+        ],
+      },
+      {
+        heading: "Track progress the right way",
+        body: "Measure once every 2 weeks with 10 swings off a tee and average your top 5. Daily numbers create noise; the trend line is what matters. Log every session in Diamond Development so you can see the curve.",
+      },
+    ],
+    faqs: [
+      { q: "How fast can I add exit velocity?", a: "Most high schoolers add 4–8 mph in 6–8 weeks with a structured block. Youth players often see bigger jumps because they have more room to grow." },
+      { q: "Do heavier bats hurt my swing?", a: "Not when used as part of an overload/underload program — the alternation is what drives adaptation. Never take a heavy bat into a game." },
+      { q: "What about my swing plane?", a: "Bat speed only helps if you hit the ball square. Any exit-velo block should include tee work with feedback on contact quality." },
+    ],
+    related: ["average-exit-velocity-by-age", "average-bat-speed-by-age", "baseball-strength-training"],
+  },
+  {
+    slug: "how-to-throw-harder",
+    title: "How to Throw Harder (Safely) — Diamond Development",
+    h1: "How to Throw Harder — Safely",
+    description:
+      "A safe, structured plan to add fastball velocity — long toss, lower-body strength, and mechanics — plus what to avoid before age 14.",
+    category: "Training",
+    readMinutes: 7,
+    updated: UPDATED,
+    intro:
+      "Adding velocity is not about throwing more. It is about throwing better, getting stronger, and recovering fully. Done right, most high school pitchers add 3–6 mph in an offseason. Done wrong, they end up in the training room.",
+    sections: [
+      {
+        heading: "The three drivers of velocity",
+        body: "",
+        sub: [
+          { heading: "1. Long toss", body: "Extend your throws to comfortable max distance 2–3x per week. Long toss builds arm strength and integrates lower body drive." },
+          { heading: "2. Lower-body strength", body: "Velocity is 60% legs. Trap-bar deadlifts, split squats, and hip-hinge power transfer directly to mound force." },
+          { heading: "3. Mechanics and mobility", body: "A stiff hip or slow front side caps velocity. Daily hip and thoracic mobility plus qualified mechanical coaching are worth more than any weighted-ball program." },
+        ],
+      },
+      {
+        heading: "A sample week",
+        body: "Do this in the offseason. Cut volume by 40% in-season.",
+        sub: [
+          { heading: "Monday", body: "Long toss + lower-body strength." },
+          { heading: "Tuesday", body: "Bullpen (light) + arm care + upper-body pull." },
+          { heading: "Wednesday", body: "Recovery: mobility, easy catch, sleep." },
+          { heading: "Thursday", body: "Long toss + lower-body power (med ball, box jumps)." },
+          { heading: "Friday", body: "Command bullpen + arm care." },
+          { heading: "Weekend", body: "One full rest day; one light throwing + mobility day." },
+        ],
+      },
+      {
+        heading: "What to avoid",
+        body: "No weighted balls under age 14. No max-effort bullpens without a proper warm-up. No ignoring pain — arm pain that persists more than 48 hours needs a doctor, not more throwing.",
+      },
+    ],
+    faqs: [
+      { q: "Do weighted balls work?", a: "Yes, when programmed by a qualified coach for pitchers 14+ with sound mechanics. On their own, unsupervised, they cause injuries." },
+      { q: "How many bullpens per week?", a: "Two in the offseason (one light, one command). One in-season on your throw day between starts." },
+      { q: "How much can I add in a year?", a: "Most 15–18 year olds add 4–8 mph in a full offseason with structured training. Late bloomers can add more." },
+    ],
+    related: ["average-pitching-velocity-by-age", "baseball-arm-care", "baseball-strength-training"],
+  },
 ];
 
 export function articleBySlug(slug: string): Article | undefined {

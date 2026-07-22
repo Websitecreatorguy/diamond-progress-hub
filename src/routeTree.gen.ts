@@ -24,12 +24,12 @@ import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutriti
 import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
 import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
 import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
+import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
-import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -114,6 +114,11 @@ const AverageBatSpeedByAgeRoute = AverageBatSpeedByAgeRouteImport.update({
   path: '/average-bat-speed-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth-callback',
+  path: '/auth-callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -137,11 +142,6 @@ const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
   id: '/resources/$slug',
   path: '/resources/$slug',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/callback',
-  path: '/callback',
-  getParentRoute: () => AuthRoute,
 } as any)
 const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
   id: '/training',
@@ -171,7 +171,8 @@ const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
@@ -192,13 +193,13 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/training': typeof AuthenticatedTrainingRoute
-  '/auth/callback': typeof AuthCallbackRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/resources/': typeof ResourcesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
@@ -219,7 +220,6 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/training': typeof AuthenticatedTrainingRoute
-  '/auth/callback': typeof AuthCallbackRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/resources': typeof ResourcesIndexRoute
 }
@@ -227,7 +227,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
@@ -248,7 +249,6 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
-  '/auth/callback': typeof AuthCallbackRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/resources/': typeof ResourcesIndexRoute
 }
@@ -257,6 +257,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-pop-time-by-age'
@@ -277,13 +278,13 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/training'
-    | '/auth/callback'
     | '/resources/$slug'
     | '/resources/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-pop-time-by-age'
@@ -304,7 +305,6 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/training'
-    | '/auth/callback'
     | '/resources/$slug'
     | '/resources'
   id:
@@ -312,6 +312,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-pop-time-by-age'
@@ -332,7 +333,6 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/progress'
     | '/_authenticated/training'
-    | '/auth/callback'
     | '/resources/$slug'
     | '/resources/'
   fileRoutesById: FileRoutesById
@@ -340,7 +340,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   AverageBatSpeedByAgeRoute: typeof AverageBatSpeedByAgeRoute
   AverageExitVelocityByAgeRoute: typeof AverageExitVelocityByAgeRoute
   AveragePopTimeByAgeRoute: typeof AveragePopTimeByAgeRoute
@@ -467,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AverageBatSpeedByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth-callback': {
+      id: '/auth-callback'
+      path: '/auth-callback'
+      fullPath: '/auth-callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -501,13 +509,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/resources/$slug'
       preLoaderRoute: typeof ResourcesSlugRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/callback'
-      fullPath: '/auth/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof AuthRoute
     }
     '/_authenticated/training': {
       id: '/_authenticated/training'
@@ -566,20 +567,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface AuthRouteChildren {
-  AuthCallbackRoute: typeof AuthCallbackRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthCallbackRoute: AuthCallbackRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRouteWithChildren,
+  AuthRoute: AuthRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   AverageBatSpeedByAgeRoute: AverageBatSpeedByAgeRoute,
   AverageExitVelocityByAgeRoute: AverageExitVelocityByAgeRoute,
   AveragePopTimeByAgeRoute: AveragePopTimeByAgeRoute,

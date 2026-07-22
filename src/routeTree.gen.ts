@@ -11,8 +11,20 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PitchingVelocityByAgeRouteImport } from './routes/pitching-velocity-by-age'
 import { Route as LeaderboardsRouteImport } from './routes/leaderboards'
+import { Route as HowToThrowHarderRouteImport } from './routes/how-to-throw-harder'
+import { Route as HowToIncreaseExitVelocityRouteImport } from './routes/how-to-increase-exit-velocity'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-workout-plans'
+import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
+import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
+import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
+import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
+import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
+import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -34,14 +46,77 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PitchingVelocityByAgeRoute = PitchingVelocityByAgeRouteImport.update({
+  id: '/pitching-velocity-by-age',
+  path: '/pitching-velocity-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaderboardsRoute = LeaderboardsRouteImport.update({
   id: '/leaderboards',
   path: '/leaderboards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToThrowHarderRoute = HowToThrowHarderRouteImport.update({
+  id: '/how-to-throw-harder',
+  path: '/how-to-throw-harder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToIncreaseExitVelocityRoute =
+  HowToIncreaseExitVelocityRouteImport.update({
+    id: '/how-to-increase-exit-velocity',
+    path: '/how-to-increase-exit-velocity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const FeaturesRoute = FeaturesRouteImport.update({
   id: '/features',
   path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseballWorkoutPlansRoute = BaseballWorkoutPlansRouteImport.update({
+  id: '/baseball-workout-plans',
+  path: '/baseball-workout-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseballStrengthTrainingRoute =
+  BaseballStrengthTrainingRouteImport.update({
+    id: '/baseball-strength-training',
+    path: '/baseball-strength-training',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
+  id: '/baseball-nutrition',
+  path: '/baseball-nutrition',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AveragePopTimeByAgeRoute = AveragePopTimeByAgeRouteImport.update({
+  id: '/average-pop-time-by-age',
+  path: '/average-pop-time-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AverageExitVelocityByAgeRoute =
+  AverageExitVelocityByAgeRouteImport.update({
+    id: '/average-exit-velocity-by-age',
+    path: '/average-exit-velocity-by-age',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AverageBatSpeedByAgeRoute = AverageBatSpeedByAgeRouteImport.update({
+  id: '/average-bat-speed-by-age',
+  path: '/average-bat-speed-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth-callback',
+  path: '/auth-callback',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -97,8 +172,20 @@ const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
+  '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
+  '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
+  '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
+  '/blog': typeof BlogRoute
   '/features': typeof FeaturesRoute
+  '/how-to-increase-exit-velocity': typeof HowToIncreaseExitVelocityRoute
+  '/how-to-throw-harder': typeof HowToThrowHarderRoute
   '/leaderboards': typeof LeaderboardsRoute
+  '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
@@ -112,8 +199,20 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
+  '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
+  '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
+  '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
+  '/blog': typeof BlogRoute
   '/features': typeof FeaturesRoute
+  '/how-to-increase-exit-velocity': typeof HowToIncreaseExitVelocityRoute
+  '/how-to-throw-harder': typeof HowToThrowHarderRoute
   '/leaderboards': typeof LeaderboardsRoute
+  '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
@@ -129,8 +228,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/auth-callback': typeof AuthCallbackRoute
+  '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
+  '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
+  '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
+  '/blog': typeof BlogRoute
   '/features': typeof FeaturesRoute
+  '/how-to-increase-exit-velocity': typeof HowToIncreaseExitVelocityRoute
+  '/how-to-throw-harder': typeof HowToThrowHarderRoute
   '/leaderboards': typeof LeaderboardsRoute
+  '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
@@ -146,8 +257,20 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/auth-callback'
+    | '/average-bat-speed-by-age'
+    | '/average-exit-velocity-by-age'
+    | '/average-pop-time-by-age'
+    | '/baseball-nutrition'
+    | '/baseball-strength-training'
+    | '/baseball-workout-plans'
+    | '/blog'
     | '/features'
+    | '/how-to-increase-exit-velocity'
+    | '/how-to-throw-harder'
     | '/leaderboards'
+    | '/pitching-velocity-by-age'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
@@ -161,8 +284,20 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/auth-callback'
+    | '/average-bat-speed-by-age'
+    | '/average-exit-velocity-by-age'
+    | '/average-pop-time-by-age'
+    | '/baseball-nutrition'
+    | '/baseball-strength-training'
+    | '/baseball-workout-plans'
+    | '/blog'
     | '/features'
+    | '/how-to-increase-exit-velocity'
+    | '/how-to-throw-harder'
     | '/leaderboards'
+    | '/pitching-velocity-by-age'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
@@ -177,8 +312,20 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/auth-callback'
+    | '/average-bat-speed-by-age'
+    | '/average-exit-velocity-by-age'
+    | '/average-pop-time-by-age'
+    | '/baseball-nutrition'
+    | '/baseball-strength-training'
+    | '/baseball-workout-plans'
+    | '/blog'
     | '/features'
+    | '/how-to-increase-exit-velocity'
+    | '/how-to-throw-harder'
     | '/leaderboards'
+    | '/pitching-velocity-by-age'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/teams'
     | '/_authenticated/charts'
@@ -194,8 +341,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  AverageBatSpeedByAgeRoute: typeof AverageBatSpeedByAgeRoute
+  AverageExitVelocityByAgeRoute: typeof AverageExitVelocityByAgeRoute
+  AveragePopTimeByAgeRoute: typeof AveragePopTimeByAgeRoute
+  BaseballNutritionRoute: typeof BaseballNutritionRoute
+  BaseballStrengthTrainingRoute: typeof BaseballStrengthTrainingRoute
+  BaseballWorkoutPlansRoute: typeof BaseballWorkoutPlansRoute
+  BlogRoute: typeof BlogRoute
   FeaturesRoute: typeof FeaturesRoute
+  HowToIncreaseExitVelocityRoute: typeof HowToIncreaseExitVelocityRoute
+  HowToThrowHarderRoute: typeof HowToThrowHarderRoute
   LeaderboardsRoute: typeof LeaderboardsRoute
+  PitchingVelocityByAgeRoute: typeof PitchingVelocityByAgeRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TeamsRoute: typeof TeamsRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
@@ -218,6 +377,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pitching-velocity-by-age': {
+      id: '/pitching-velocity-by-age'
+      path: '/pitching-velocity-by-age'
+      fullPath: '/pitching-velocity-by-age'
+      preLoaderRoute: typeof PitchingVelocityByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leaderboards': {
       id: '/leaderboards'
       path: '/leaderboards'
@@ -225,11 +398,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeaderboardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-throw-harder': {
+      id: '/how-to-throw-harder'
+      path: '/how-to-throw-harder'
+      fullPath: '/how-to-throw-harder'
+      preLoaderRoute: typeof HowToThrowHarderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-increase-exit-velocity': {
+      id: '/how-to-increase-exit-velocity'
+      path: '/how-to-increase-exit-velocity'
+      fullPath: '/how-to-increase-exit-velocity'
+      preLoaderRoute: typeof HowToIncreaseExitVelocityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features': {
       id: '/features'
       path: '/features'
       fullPath: '/features'
       preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/baseball-workout-plans': {
+      id: '/baseball-workout-plans'
+      path: '/baseball-workout-plans'
+      fullPath: '/baseball-workout-plans'
+      preLoaderRoute: typeof BaseballWorkoutPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/baseball-strength-training': {
+      id: '/baseball-strength-training'
+      path: '/baseball-strength-training'
+      fullPath: '/baseball-strength-training'
+      preLoaderRoute: typeof BaseballStrengthTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/baseball-nutrition': {
+      id: '/baseball-nutrition'
+      path: '/baseball-nutrition'
+      fullPath: '/baseball-nutrition'
+      preLoaderRoute: typeof BaseballNutritionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-pop-time-by-age': {
+      id: '/average-pop-time-by-age'
+      path: '/average-pop-time-by-age'
+      fullPath: '/average-pop-time-by-age'
+      preLoaderRoute: typeof AveragePopTimeByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-exit-velocity-by-age': {
+      id: '/average-exit-velocity-by-age'
+      path: '/average-exit-velocity-by-age'
+      fullPath: '/average-exit-velocity-by-age'
+      preLoaderRoute: typeof AverageExitVelocityByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-bat-speed-by-age': {
+      id: '/average-bat-speed-by-age'
+      path: '/average-bat-speed-by-age'
+      fullPath: '/average-bat-speed-by-age'
+      preLoaderRoute: typeof AverageBatSpeedByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth-callback': {
+      id: '/auth-callback'
+      path: '/auth-callback'
+      fullPath: '/auth-callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -328,8 +571,20 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
+  AverageBatSpeedByAgeRoute: AverageBatSpeedByAgeRoute,
+  AverageExitVelocityByAgeRoute: AverageExitVelocityByAgeRoute,
+  AveragePopTimeByAgeRoute: AveragePopTimeByAgeRoute,
+  BaseballNutritionRoute: BaseballNutritionRoute,
+  BaseballStrengthTrainingRoute: BaseballStrengthTrainingRoute,
+  BaseballWorkoutPlansRoute: BaseballWorkoutPlansRoute,
+  BlogRoute: BlogRoute,
   FeaturesRoute: FeaturesRoute,
+  HowToIncreaseExitVelocityRoute: HowToIncreaseExitVelocityRoute,
+  HowToThrowHarderRoute: HowToThrowHarderRoute,
   LeaderboardsRoute: LeaderboardsRoute,
+  PitchingVelocityByAgeRoute: PitchingVelocityByAgeRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TeamsRoute: TeamsRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
@@ -338,13 +593,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

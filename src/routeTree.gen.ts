@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PitchingVelocityByAgeRouteImport } from './routes/pitching-velocity-by-age'
 import { Route as LeaderboardsRouteImport } from './routes/leaderboards'
@@ -20,6 +21,7 @@ import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-workout-plans'
 import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
+import { Route as BaseballStatsRouteImport } from './routes/baseball-stats'
 import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
 import { Route as AverageWeightByAgeRouteImport } from './routes/average-weight-by-age'
 import { Route as AverageVerticalJumpByAgeRouteImport } from './routes/average-vertical-jump-by-age'
@@ -52,6 +54,11 @@ const TeamsRoute = TeamsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -101,6 +108,11 @@ const BaseballStrengthTrainingRoute =
     path: '/baseball-strength-training',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BaseballStatsRoute = BaseballStatsRouteImport.update({
+  id: '/baseball-stats',
+  path: '/baseball-stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
   id: '/baseball-nutrition',
   path: '/baseball-nutrition',
@@ -233,6 +245,7 @@ export interface FileRoutesByFullPath {
   '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
   '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-stats': typeof BaseballStatsRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
   '/blog': typeof BlogRoute
@@ -242,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/leaderboards': typeof LeaderboardsRoute
   '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
@@ -268,6 +282,7 @@ export interface FileRoutesByTo {
   '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
   '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-stats': typeof BaseballStatsRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
   '/blog': typeof BlogRoute
@@ -277,6 +292,7 @@ export interface FileRoutesByTo {
   '/leaderboards': typeof LeaderboardsRoute
   '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
@@ -305,6 +321,7 @@ export interface FileRoutesById {
   '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
   '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
+  '/baseball-stats': typeof BaseballStatsRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
   '/blog': typeof BlogRoute
@@ -314,6 +331,7 @@ export interface FileRoutesById {
   '/leaderboards': typeof LeaderboardsRoute
   '/pitching-velocity-by-age': typeof PitchingVelocityByAgeRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
@@ -342,6 +360,7 @@ export interface FileRouteTypes {
     | '/average-vertical-jump-by-age'
     | '/average-weight-by-age'
     | '/baseball-nutrition'
+    | '/baseball-stats'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
     | '/blog'
@@ -351,6 +370,7 @@ export interface FileRouteTypes {
     | '/leaderboards'
     | '/pitching-velocity-by-age'
     | '/reset-password'
+    | '/search'
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
@@ -377,6 +397,7 @@ export interface FileRouteTypes {
     | '/average-vertical-jump-by-age'
     | '/average-weight-by-age'
     | '/baseball-nutrition'
+    | '/baseball-stats'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
     | '/blog'
@@ -386,6 +407,7 @@ export interface FileRouteTypes {
     | '/leaderboards'
     | '/pitching-velocity-by-age'
     | '/reset-password'
+    | '/search'
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
@@ -413,6 +435,7 @@ export interface FileRouteTypes {
     | '/average-vertical-jump-by-age'
     | '/average-weight-by-age'
     | '/baseball-nutrition'
+    | '/baseball-stats'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
     | '/blog'
@@ -422,6 +445,7 @@ export interface FileRouteTypes {
     | '/leaderboards'
     | '/pitching-velocity-by-age'
     | '/reset-password'
+    | '/search'
     | '/sitemap.xml'
     | '/teams'
     | '/_authenticated/charts'
@@ -450,6 +474,7 @@ export interface RootRouteChildren {
   AverageVerticalJumpByAgeRoute: typeof AverageVerticalJumpByAgeRoute
   AverageWeightByAgeRoute: typeof AverageWeightByAgeRoute
   BaseballNutritionRoute: typeof BaseballNutritionRoute
+  BaseballStatsRoute: typeof BaseballStatsRoute
   BaseballStrengthTrainingRoute: typeof BaseballStrengthTrainingRoute
   BaseballWorkoutPlansRoute: typeof BaseballWorkoutPlansRoute
   BlogRoute: typeof BlogRoute
@@ -459,6 +484,7 @@ export interface RootRouteChildren {
   LeaderboardsRoute: typeof LeaderboardsRoute
   PitchingVelocityByAgeRoute: typeof PitchingVelocityByAgeRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TeamsRoute: typeof TeamsRoute
   AveragePitchingVelocityAgeRoute: typeof AveragePitchingVelocityAgeRoute
@@ -482,6 +508,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -545,6 +578,13 @@ declare module '@tanstack/react-router' {
       path: '/baseball-strength-training'
       fullPath: '/baseball-strength-training'
       preLoaderRoute: typeof BaseballStrengthTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/baseball-stats': {
+      id: '/baseball-stats'
+      path: '/baseball-stats'
+      fullPath: '/baseball-stats'
+      preLoaderRoute: typeof BaseballStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/baseball-nutrition': {
@@ -744,6 +784,7 @@ const rootRouteChildren: RootRouteChildren = {
   AverageVerticalJumpByAgeRoute: AverageVerticalJumpByAgeRoute,
   AverageWeightByAgeRoute: AverageWeightByAgeRoute,
   BaseballNutritionRoute: BaseballNutritionRoute,
+  BaseballStatsRoute: BaseballStatsRoute,
   BaseballStrengthTrainingRoute: BaseballStrengthTrainingRoute,
   BaseballWorkoutPlansRoute: BaseballWorkoutPlansRoute,
   BlogRoute: BlogRoute,
@@ -753,6 +794,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardsRoute: LeaderboardsRoute,
   PitchingVelocityByAgeRoute: PitchingVelocityByAgeRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TeamsRoute: TeamsRoute,
   AveragePitchingVelocityAgeRoute: AveragePitchingVelocityAgeRoute,

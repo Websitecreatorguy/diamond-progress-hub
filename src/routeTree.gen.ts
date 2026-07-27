@@ -29,6 +29,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
+import { Route as CalculatorsIndexRouteImport } from './routes/calculators.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
@@ -139,6 +140,11 @@ const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
   path: '/resources/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorsIndexRoute = CalculatorsIndexRouteImport.update({
+  id: '/calculators/',
+  path: '/calculators/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
   id: '/resources/$slug',
   path: '/resources/$slug',
@@ -201,6 +207,7 @@ export interface FileRoutesByFullPath {
   '/training': typeof AuthenticatedTrainingRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
+  '/calculators/': typeof CalculatorsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -229,6 +236,7 @@ export interface FileRoutesByTo {
   '/training': typeof AuthenticatedTrainingRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
+  '/calculators': typeof CalculatorsIndexRoute
   '/resources': typeof ResourcesIndexRoute
 }
 export interface FileRoutesById {
@@ -259,6 +267,7 @@ export interface FileRoutesById {
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
+  '/calculators/': typeof CalculatorsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
 }
 export interface FileRouteTypes {
@@ -289,6 +298,7 @@ export interface FileRouteTypes {
     | '/training'
     | '/calculators/$slug'
     | '/resources/$slug'
+    | '/calculators/'
     | '/resources/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -317,6 +327,7 @@ export interface FileRouteTypes {
     | '/training'
     | '/calculators/$slug'
     | '/resources/$slug'
+    | '/calculators'
     | '/resources'
   id:
     | '__root__'
@@ -346,6 +357,7 @@ export interface FileRouteTypes {
     | '/_authenticated/training'
     | '/calculators/$slug'
     | '/resources/$slug'
+    | '/calculators/'
     | '/resources/'
   fileRoutesById: FileRoutesById
 }
@@ -371,6 +383,7 @@ export interface RootRouteChildren {
   TeamsRoute: typeof TeamsRoute
   CalculatorsSlugRoute: typeof CalculatorsSlugRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
+  CalculatorsIndexRoute: typeof CalculatorsIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
 }
 
@@ -516,6 +529,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculators/': {
+      id: '/calculators/'
+      path: '/calculators'
+      fullPath: '/calculators/'
+      preLoaderRoute: typeof CalculatorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources/$slug': {
       id: '/resources/$slug'
       path: '/resources/$slug'
@@ -609,6 +629,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeamsRoute: TeamsRoute,
   CalculatorsSlugRoute: CalculatorsSlugRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
+  CalculatorsIndexRoute: CalculatorsIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
 }
 export const routeTree = rootRouteImport

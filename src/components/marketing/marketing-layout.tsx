@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { Logo, LOGO_URL } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,8 @@ const NAV = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
   { to: "/teams", label: "Teams" },
+  { to: "/calculators", label: "Calculators" },
+  { to: "/baseball-stats", label: "Stats" },
   { to: "/leaderboards", label: "Leaderboards" },
   { to: "/resources", label: "Resources" },
 ] as const;
@@ -61,6 +63,13 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
             })}
           </nav>
           <div className="hidden items-center gap-2 md:flex">
+            <Link
+              to="/search"
+              aria-label="Search"
+              className="grid h-9 w-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              <Search className="h-4 w-4" />
+            </Link>
             {signedIn ? (
               <Button asChild size="sm" className="bg-gradient-primary shadow-glow">
                 <Link to="/dashboard">Dashboard</Link>
@@ -87,6 +96,13 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
         {open && (
           <div className="border-t border-border md:hidden">
             <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+              <Link
+                to="/search"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-secondary"
+              >
+                Search
+              </Link>
               {NAV.map((item) => (
                 <Link
                   key={item.to}
@@ -154,13 +170,17 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
             links={[
               { to: "/features", label: "Features" },
               { to: "/teams", label: "Teams" },
-              { to: "/leaderboards", label: "Leaderboards" },
+              { to: "/calculators", label: "Calculators" },
+  { to: "/baseball-stats", label: "Stats" },
+  { to: "/leaderboards", label: "Leaderboards" },
               { to: "/dashboard", label: "Player dashboard" },
             ]}
           />
           <FooterCol
             title="Resources"
             links={[
+              { to: "/calculators", label: "Baseball calculators" },
+              { to: "/baseball-stats", label: "Stats by age" },
               { to: "/resources", label: "All resources" },
               { to: "/resources/average-exit-velocity-by-age", label: "Exit velo by age" },
               { to: "/resources/average-pitching-velocity-by-age", label: "Pitch velo by age" },

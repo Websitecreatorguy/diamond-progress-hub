@@ -3,6 +3,8 @@ import type {} from "@tanstack/react-start";
 import { ARTICLES } from "@/lib/resources";
 import { TOP_LEVEL_ARTICLE_PATHS } from "@/components/article-view";
 import { SITE_URL } from "@/lib/seo";
+import { CALCULATORS } from "@/lib/calculators";
+import { STAT_PAGES, PITCH_AGE_SLUGS } from "@/lib/stat-pages";
 
 interface Entry {
   path: string;
@@ -46,7 +48,29 @@ export const Route = createFileRoute("/sitemap.xml")({
           lastmod: a.updated,
         }));
 
-        const all = [...staticEntries, ...topLevelEntries, ...articleEntries];
+        const calcEntries: Entry[] = [
+          { path: "/calculators", changefreq: "weekly", priority: "0.9" },
+          ...CALCULATORS.map<Entry>((c) => ({
+            path: `/calculators/${c.slug}`,
+            changefreq: "monthly",
+            priority: "0.85",
+          })),
+        ];
+        const statEntries: Entry[] = [
+          { path: "/baseball-stats", changefreq: "weekly", priority: "0.9" },
+          ...STAT_PAGES.map<Entry>((p) => ({
+            path: p.path,
+            changefreq: "monthly",
+            priority: "0.85",
+          })),
+          ...PITCH_AGE_SLUGS.map<Entry>((slug) => ({
+            path: `/average-pitching-velocity/${slug}`,
+            changefreq: "monthly",
+            priority: "0.8",
+          })),
+        ];
+
+        const all = [...staticEntries, ...calcEntries, ...statEntries, ...topLevelEntries, ...articleEntries];
 
         const urls = all.map((e) =>
           [

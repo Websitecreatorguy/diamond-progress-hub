@@ -21,10 +21,14 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-workout-plans'
 import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
 import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
+import { Route as AverageWeightByAgeRouteImport } from './routes/average-weight-by-age'
+import { Route as AverageVerticalJumpByAgeRouteImport } from './routes/average-vertical-jump-by-age'
+import { Route as AverageThrowingVelocityByAgeRouteImport } from './routes/average-throwing-velocity-by-age'
 import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
 import { Route as AverageHeightByAgeRouteImport } from './routes/average-height-by-age'
 import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
 import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
+import { Route as Average60YardDashByAgeRouteImport } from './routes/average-60-yard-dash-by-age'
 import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -101,6 +105,23 @@ const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
   path: '/baseball-nutrition',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AverageWeightByAgeRoute = AverageWeightByAgeRouteImport.update({
+  id: '/average-weight-by-age',
+  path: '/average-weight-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AverageVerticalJumpByAgeRoute =
+  AverageVerticalJumpByAgeRouteImport.update({
+    id: '/average-vertical-jump-by-age',
+    path: '/average-vertical-jump-by-age',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AverageThrowingVelocityByAgeRoute =
+  AverageThrowingVelocityByAgeRouteImport.update({
+    id: '/average-throwing-velocity-by-age',
+    path: '/average-throwing-velocity-by-age',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AveragePopTimeByAgeRoute = AveragePopTimeByAgeRouteImport.update({
   id: '/average-pop-time-by-age',
   path: '/average-pop-time-by-age',
@@ -120,6 +141,11 @@ const AverageExitVelocityByAgeRoute =
 const AverageBatSpeedByAgeRoute = AverageBatSpeedByAgeRouteImport.update({
   id: '/average-bat-speed-by-age',
   path: '/average-bat-speed-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Average60YardDashByAgeRoute = Average60YardDashByAgeRouteImport.update({
+  id: '/average-60-yard-dash-by-age',
+  path: '/average-60-yard-dash-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
@@ -191,10 +217,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/auth-callback': typeof AuthCallbackRoute
+  '/average-60-yard-dash-by-age': typeof Average60YardDashByAgeRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/average-throwing-velocity-by-age': typeof AverageThrowingVelocityByAgeRoute
+  '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
+  '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
@@ -221,10 +251,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/auth-callback': typeof AuthCallbackRoute
+  '/average-60-yard-dash-by-age': typeof Average60YardDashByAgeRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/average-throwing-velocity-by-age': typeof AverageThrowingVelocityByAgeRoute
+  '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
+  '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
@@ -253,10 +287,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/auth-callback': typeof AuthCallbackRoute
+  '/average-60-yard-dash-by-age': typeof Average60YardDashByAgeRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
   '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
+  '/average-throwing-velocity-by-age': typeof AverageThrowingVelocityByAgeRoute
+  '/average-vertical-jump-by-age': typeof AverageVerticalJumpByAgeRoute
+  '/average-weight-by-age': typeof AverageWeightByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
   '/baseball-workout-plans': typeof BaseballWorkoutPlansRoute
@@ -285,10 +323,14 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/auth-callback'
+    | '/average-60-yard-dash-by-age'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-height-by-age'
     | '/average-pop-time-by-age'
+    | '/average-throwing-velocity-by-age'
+    | '/average-vertical-jump-by-age'
+    | '/average-weight-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
@@ -315,10 +357,14 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/auth-callback'
+    | '/average-60-yard-dash-by-age'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-height-by-age'
     | '/average-pop-time-by-age'
+    | '/average-throwing-velocity-by-age'
+    | '/average-vertical-jump-by-age'
+    | '/average-weight-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
@@ -346,10 +392,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/auth-callback'
+    | '/average-60-yard-dash-by-age'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
     | '/average-height-by-age'
     | '/average-pop-time-by-age'
+    | '/average-throwing-velocity-by-age'
+    | '/average-vertical-jump-by-age'
+    | '/average-weight-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
     | '/baseball-workout-plans'
@@ -378,10 +428,14 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  Average60YardDashByAgeRoute: typeof Average60YardDashByAgeRoute
   AverageBatSpeedByAgeRoute: typeof AverageBatSpeedByAgeRoute
   AverageExitVelocityByAgeRoute: typeof AverageExitVelocityByAgeRoute
   AverageHeightByAgeRoute: typeof AverageHeightByAgeRoute
   AveragePopTimeByAgeRoute: typeof AveragePopTimeByAgeRoute
+  AverageThrowingVelocityByAgeRoute: typeof AverageThrowingVelocityByAgeRoute
+  AverageVerticalJumpByAgeRoute: typeof AverageVerticalJumpByAgeRoute
+  AverageWeightByAgeRoute: typeof AverageWeightByAgeRoute
   BaseballNutritionRoute: typeof BaseballNutritionRoute
   BaseballStrengthTrainingRoute: typeof BaseballStrengthTrainingRoute
   BaseballWorkoutPlansRoute: typeof BaseballWorkoutPlansRoute
@@ -486,6 +540,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseballNutritionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/average-weight-by-age': {
+      id: '/average-weight-by-age'
+      path: '/average-weight-by-age'
+      fullPath: '/average-weight-by-age'
+      preLoaderRoute: typeof AverageWeightByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-vertical-jump-by-age': {
+      id: '/average-vertical-jump-by-age'
+      path: '/average-vertical-jump-by-age'
+      fullPath: '/average-vertical-jump-by-age'
+      preLoaderRoute: typeof AverageVerticalJumpByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-throwing-velocity-by-age': {
+      id: '/average-throwing-velocity-by-age'
+      path: '/average-throwing-velocity-by-age'
+      fullPath: '/average-throwing-velocity-by-age'
+      preLoaderRoute: typeof AverageThrowingVelocityByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/average-pop-time-by-age': {
       id: '/average-pop-time-by-age'
       path: '/average-pop-time-by-age'
@@ -512,6 +587,13 @@ declare module '@tanstack/react-router' {
       path: '/average-bat-speed-by-age'
       fullPath: '/average-bat-speed-by-age'
       preLoaderRoute: typeof AverageBatSpeedByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-60-yard-dash-by-age': {
+      id: '/average-60-yard-dash-by-age'
+      path: '/average-60-yard-dash-by-age'
+      fullPath: '/average-60-yard-dash-by-age'
+      preLoaderRoute: typeof Average60YardDashByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth-callback': {
@@ -632,10 +714,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  Average60YardDashByAgeRoute: Average60YardDashByAgeRoute,
   AverageBatSpeedByAgeRoute: AverageBatSpeedByAgeRoute,
   AverageExitVelocityByAgeRoute: AverageExitVelocityByAgeRoute,
   AverageHeightByAgeRoute: AverageHeightByAgeRoute,
   AveragePopTimeByAgeRoute: AveragePopTimeByAgeRoute,
+  AverageThrowingVelocityByAgeRoute: AverageThrowingVelocityByAgeRoute,
+  AverageVerticalJumpByAgeRoute: AverageVerticalJumpByAgeRoute,
+  AverageWeightByAgeRoute: AverageWeightByAgeRoute,
   BaseballNutritionRoute: BaseballNutritionRoute,
   BaseballStrengthTrainingRoute: BaseballStrengthTrainingRoute,
   BaseballWorkoutPlansRoute: BaseballWorkoutPlansRoute,

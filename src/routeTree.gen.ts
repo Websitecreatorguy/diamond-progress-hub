@@ -22,6 +22,7 @@ import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-work
 import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
 import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
 import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
+import { Route as AverageHeightByAgeRouteImport } from './routes/average-height-by-age'
 import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
 import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
 import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
@@ -103,6 +104,11 @@ const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
 const AveragePopTimeByAgeRoute = AveragePopTimeByAgeRouteImport.update({
   id: '/average-pop-time-by-age',
   path: '/average-pop-time-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AverageHeightByAgeRoute = AverageHeightByAgeRouteImport.update({
+  id: '/average-height-by-age',
+  path: '/average-height-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AverageExitVelocityByAgeRoute =
@@ -187,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/auth-callback': typeof AuthCallbackRoute
   '/average-bat-speed-by-age': typeof AverageBatSpeedByAgeRoute
   '/average-exit-velocity-by-age': typeof AverageExitVelocityByAgeRoute
+  '/average-height-by-age': typeof AverageHeightByAgeRoute
   '/average-pop-time-by-age': typeof AveragePopTimeByAgeRoute
   '/baseball-nutrition': typeof BaseballNutritionRoute
   '/baseball-strength-training': typeof BaseballStrengthTrainingRoute
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
+    | '/average-height-by-age'
     | '/average-pop-time-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
+    | '/average-height-by-age'
     | '/average-pop-time-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
@@ -337,6 +348,7 @@ export interface FileRouteTypes {
     | '/auth-callback'
     | '/average-bat-speed-by-age'
     | '/average-exit-velocity-by-age'
+    | '/average-height-by-age'
     | '/average-pop-time-by-age'
     | '/baseball-nutrition'
     | '/baseball-strength-training'
@@ -368,6 +380,7 @@ export interface RootRouteChildren {
   AuthCallbackRoute: typeof AuthCallbackRoute
   AverageBatSpeedByAgeRoute: typeof AverageBatSpeedByAgeRoute
   AverageExitVelocityByAgeRoute: typeof AverageExitVelocityByAgeRoute
+  AverageHeightByAgeRoute: typeof AverageHeightByAgeRoute
   AveragePopTimeByAgeRoute: typeof AveragePopTimeByAgeRoute
   BaseballNutritionRoute: typeof BaseballNutritionRoute
   BaseballStrengthTrainingRoute: typeof BaseballStrengthTrainingRoute
@@ -478,6 +491,13 @@ declare module '@tanstack/react-router' {
       path: '/average-pop-time-by-age'
       fullPath: '/average-pop-time-by-age'
       preLoaderRoute: typeof AveragePopTimeByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/average-height-by-age': {
+      id: '/average-height-by-age'
+      path: '/average-height-by-age'
+      fullPath: '/average-height-by-age'
+      preLoaderRoute: typeof AverageHeightByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/average-exit-velocity-by-age': {
@@ -614,6 +634,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthCallbackRoute: AuthCallbackRoute,
   AverageBatSpeedByAgeRoute: AverageBatSpeedByAgeRoute,
   AverageExitVelocityByAgeRoute: AverageExitVelocityByAgeRoute,
+  AverageHeightByAgeRoute: AverageHeightByAgeRoute,
   AveragePopTimeByAgeRoute: AveragePopTimeByAgeRoute,
   BaseballNutritionRoute: BaseballNutritionRoute,
   BaseballStrengthTrainingRoute: BaseballStrengthTrainingRoute,

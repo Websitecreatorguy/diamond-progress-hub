@@ -159,8 +159,8 @@ export function MetricCalculator({
               <Tooltip
                 contentStyle={{
                   borderRadius: 12,
-                  border: "1px solid hsl(var(--border))",
-                  background: "hsl(var(--card))",
+                  border: "1px solid var(--color-border)",
+                  background: "var(--color-card)",
                   fontSize: 12,
                 }}
                 formatter={(v: number, name: string) => [`${v} ${metric.unit}`, name]}
@@ -170,7 +170,7 @@ export function MetricCalculator({
                 type="monotone"
                 dataKey="average"
                 name="Average"
-                stroke="hsl(var(--primary))"
+                stroke="var(--color-primary-glow)"
                 strokeWidth={2.5}
                 dot={false}
               />
@@ -178,7 +178,7 @@ export function MetricCalculator({
                 type="monotone"
                 dataKey="elite"
                 name="Elite"
-                stroke="hsl(var(--muted-foreground))"
+                stroke="var(--color-muted-foreground)"
                 strokeDasharray="5 4"
                 strokeWidth={2}
                 dot={false}
@@ -188,8 +188,8 @@ export function MetricCalculator({
                   x={shownAge}
                   y={numericValue}
                   r={6}
-                  fill="hsl(var(--primary))"
-                  stroke="hsl(var(--background))"
+                  fill="var(--color-primary-glow)"
+                  stroke="var(--color-background)"
                   strokeWidth={2}
                 />
               )}

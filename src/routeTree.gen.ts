@@ -41,6 +41,7 @@ import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
 import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average-pitching-velocity.$age'
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
+import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
 import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -214,6 +215,11 @@ const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
   id: '/records',
   path: '/records',
@@ -283,6 +289,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/team': typeof AuthenticatedTeamRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -323,6 +330,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/team': typeof AuthenticatedTeamRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -365,6 +373,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
   '/_authenticated/records': typeof AuthenticatedRecordsRoute
+  '/_authenticated/team': typeof AuthenticatedTeamRoute
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -407,6 +416,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/records'
+    | '/team'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -447,6 +457,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/records'
+    | '/team'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -488,6 +499,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/progress'
     | '/_authenticated/records'
+    | '/_authenticated/team'
     | '/_authenticated/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -756,6 +768,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTrainingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/records': {
       id: '/_authenticated/records'
       path: '/records'
@@ -816,6 +835,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
   AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRoute
+  AuthenticatedTeamRoute: typeof AuthenticatedTeamRoute
   AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
 }
 
@@ -827,6 +847,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProgressRoute: AuthenticatedProgressRoute,
   AuthenticatedRecordsRoute: AuthenticatedRecordsRoute,
+  AuthenticatedTeamRoute: AuthenticatedTeamRoute,
   AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
 }
 

@@ -81,12 +81,7 @@ function TeamPage() {
       const { data: u } = await supabase.auth.getUser();
       if (!u.user) throw new Error("Your session expired. Please sign in again.");
       const { data: found } = await supabase.from("teams").select("id, name").eq("join_code", clean).maybeSingle();
-      if (!found) {
-        // Codes for teams we're not a member of aren't readable, so fall back to a request by code.
-        const { error } = await supabase.rpc as never;
-        void error;
-        throw new Error("That team code wasn't found. Double-check it with your coach.");
-      }
+      if (!found) throw new Error("That team code wasn't found. Double-check it with your coach.");
       const { error } = await supabase
         .from("team_join_requests")
         .insert({ team_id: found.id, user_id: u.user.id, message: null });

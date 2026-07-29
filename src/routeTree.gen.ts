@@ -41,9 +41,11 @@ import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
 import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average-pitching-velocity.$age'
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
+import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedMetricsRouteImport } from './routes/_authenticated/metrics'
+import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
 
@@ -212,6 +214,11 @@ const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
+  id: '/records',
+  path: '/records',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
@@ -225,6 +232,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
 const AuthenticatedMetricsRoute = AuthenticatedMetricsRouteImport.update({
   id: '/metrics',
   path: '/metrics',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGoalsRoute = AuthenticatedGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -266,9 +278,11 @@ export interface FileRoutesByFullPath {
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/goals': typeof AuthenticatedGoalsRoute
   '/metrics': typeof AuthenticatedMetricsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
+  '/records': typeof AuthenticatedRecordsRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -304,9 +318,11 @@ export interface FileRoutesByTo {
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/goals': typeof AuthenticatedGoalsRoute
   '/metrics': typeof AuthenticatedMetricsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
+  '/records': typeof AuthenticatedRecordsRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -344,9 +360,11 @@ export interface FileRoutesById {
   '/teams': typeof TeamsRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/goals': typeof AuthenticatedGoalsRoute
   '/_authenticated/metrics': typeof AuthenticatedMetricsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
+  '/_authenticated/records': typeof AuthenticatedRecordsRoute
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -384,9 +402,11 @@ export interface FileRouteTypes {
     | '/teams'
     | '/charts'
     | '/dashboard'
+    | '/goals'
     | '/metrics'
     | '/profile'
     | '/progress'
+    | '/records'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -422,9 +442,11 @@ export interface FileRouteTypes {
     | '/teams'
     | '/charts'
     | '/dashboard'
+    | '/goals'
     | '/metrics'
     | '/profile'
     | '/progress'
+    | '/records'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -461,9 +483,11 @@ export interface FileRouteTypes {
     | '/teams'
     | '/_authenticated/charts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/goals'
     | '/_authenticated/metrics'
     | '/_authenticated/profile'
     | '/_authenticated/progress'
+    | '/_authenticated/records'
     | '/_authenticated/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -732,6 +756,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTrainingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/records': {
+      id: '/_authenticated/records'
+      path: '/records'
+      fullPath: '/records'
+      preLoaderRoute: typeof AuthenticatedRecordsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/progress': {
       id: '/_authenticated/progress'
       path: '/progress'
@@ -751,6 +782,13 @@ declare module '@tanstack/react-router' {
       path: '/metrics'
       fullPath: '/metrics'
       preLoaderRoute: typeof AuthenticatedMetricsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/goals': {
+      id: '/_authenticated/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof AuthenticatedGoalsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -773,18 +811,22 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChartsRoute: typeof AuthenticatedChartsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
   AuthenticatedMetricsRoute: typeof AuthenticatedMetricsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
+  AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRoute
   AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChartsRoute: AuthenticatedChartsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedGoalsRoute: AuthenticatedGoalsRoute,
   AuthenticatedMetricsRoute: AuthenticatedMetricsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProgressRoute: AuthenticatedProgressRoute,
+  AuthenticatedRecordsRoute: AuthenticatedRecordsRoute,
   AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
 }
 

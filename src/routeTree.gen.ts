@@ -41,7 +41,9 @@ import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
 import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average-pitching-velocity.$age'
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
+import { Route as AuthenticatedTeamComparisonRouteImport } from './routes/_authenticated/team-comparison'
 import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -215,9 +217,20 @@ const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTeamComparisonRoute =
+  AuthenticatedTeamComparisonRouteImport.update({
+    id: '/team-comparison',
+    path: '/team-comparison',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
@@ -289,7 +302,9 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/team': typeof AuthenticatedTeamRoute
+  '/team-comparison': typeof AuthenticatedTeamComparisonRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -330,7 +345,9 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/team': typeof AuthenticatedTeamRoute
+  '/team-comparison': typeof AuthenticatedTeamComparisonRoute
   '/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -373,7 +390,9 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
   '/_authenticated/records': typeof AuthenticatedRecordsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/team': typeof AuthenticatedTeamRoute
+  '/_authenticated/team-comparison': typeof AuthenticatedTeamComparisonRoute
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
   '/average-pitching-velocity/$age': typeof AveragePitchingVelocityAgeRoute
   '/calculators/$slug': typeof CalculatorsSlugRoute
@@ -416,7 +435,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/records'
+    | '/settings'
     | '/team'
+    | '/team-comparison'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -457,7 +478,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/progress'
     | '/records'
+    | '/settings'
     | '/team'
+    | '/team-comparison'
     | '/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -499,7 +522,9 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/progress'
     | '/_authenticated/records'
+    | '/_authenticated/settings'
     | '/_authenticated/team'
+    | '/_authenticated/team-comparison'
     | '/_authenticated/training'
     | '/average-pitching-velocity/$age'
     | '/calculators/$slug'
@@ -768,11 +793,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTrainingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/team-comparison': {
+      id: '/_authenticated/team-comparison'
+      path: '/team-comparison'
+      fullPath: '/team-comparison'
+      preLoaderRoute: typeof AuthenticatedTeamComparisonRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/team': {
       id: '/_authenticated/team'
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/records': {
@@ -835,7 +874,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
   AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTeamRoute: typeof AuthenticatedTeamRoute
+  AuthenticatedTeamComparisonRoute: typeof AuthenticatedTeamComparisonRoute
   AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
 }
 
@@ -847,7 +888,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProgressRoute: AuthenticatedProgressRoute,
   AuthenticatedRecordsRoute: AuthenticatedRecordsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTeamRoute: AuthenticatedTeamRoute,
+  AuthenticatedTeamComparisonRoute: AuthenticatedTeamComparisonRoute,
   AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
 }
 

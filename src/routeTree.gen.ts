@@ -50,6 +50,7 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedMetricsRouteImport } from './routes/_authenticated/metrics'
 import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
 import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
 
 const TeamsRoute = TeamsRouteImport.update({
@@ -263,6 +264,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
   id: '/charts',
   path: '/charts',
@@ -296,6 +302,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
+  '/coach': typeof AuthenticatedCoachRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/goals': typeof AuthenticatedGoalsRoute
   '/metrics': typeof AuthenticatedMetricsRoute
@@ -339,6 +346,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
+  '/coach': typeof AuthenticatedCoachRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/goals': typeof AuthenticatedGoalsRoute
   '/metrics': typeof AuthenticatedMetricsRoute
@@ -384,6 +392,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teams': typeof TeamsRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
+  '/_authenticated/coach': typeof AuthenticatedCoachRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/goals': typeof AuthenticatedGoalsRoute
   '/_authenticated/metrics': typeof AuthenticatedMetricsRoute
@@ -429,6 +438,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
+    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/metrics'
@@ -472,6 +482,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/teams'
     | '/charts'
+    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/metrics'
@@ -516,6 +527,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/teams'
     | '/_authenticated/charts'
+    | '/_authenticated/coach'
     | '/_authenticated/dashboard'
     | '/_authenticated/goals'
     | '/_authenticated/metrics'
@@ -856,6 +868,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/coach': {
+      id: '/_authenticated/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof AuthenticatedCoachRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/charts': {
       id: '/_authenticated/charts'
       path: '/charts'
@@ -868,6 +887,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChartsRoute: typeof AuthenticatedChartsRoute
+  AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedGoalsRoute: typeof AuthenticatedGoalsRoute
   AuthenticatedMetricsRoute: typeof AuthenticatedMetricsRoute
@@ -882,6 +902,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChartsRoute: AuthenticatedChartsRoute,
+  AuthenticatedCoachRoute: AuthenticatedCoachRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGoalsRoute: AuthenticatedGoalsRoute,
   AuthenticatedMetricsRoute: AuthenticatedMetricsRoute,

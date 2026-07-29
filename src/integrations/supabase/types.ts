@@ -14,6 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_log: {
+        Row: {
+          created_at: string
+          detail: string | null
+          id: string
+          kind: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          kind: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          kind?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      coach_feedback: {
+        Row: {
+          area_to_improve: string | null
+          coach_id: string
+          created_at: string
+          id: string
+          player_id: string
+          player_note: string | null
+          private_note: string | null
+          recommended_drill: string | null
+          strength: string | null
+          team_id: string
+          weekly_focus: string | null
+        }
+        Insert: {
+          area_to_improve?: string | null
+          coach_id: string
+          created_at?: string
+          id?: string
+          player_id: string
+          player_note?: string | null
+          private_note?: string | null
+          recommended_drill?: string | null
+          strength?: string | null
+          team_id: string
+          weekly_focus?: string | null
+        }
+        Update: {
+          area_to_improve?: string | null
+          coach_id?: string
+          created_at?: string
+          id?: string
+          player_id?: string
+          player_note?: string | null
+          private_note?: string | null
+          recommended_drill?: string | null
+          strength?: string | null
+          team_id?: string
+          weekly_focus?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_feedback_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      goals: {
+        Row: {
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          current_value: number | null
+          direction: string
+          id: string
+          metric: string | null
+          start_value: number | null
+          target_date: string | null
+          target_value: number
+          title: string
+          unit: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_value?: number | null
+          direction?: string
+          id?: string
+          metric?: string | null
+          start_value?: number | null
+          target_date?: string | null
+          target_value: number
+          title: string
+          unit?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_value?: number | null
+          direction?: string
+          id?: string
+          metric?: string | null
+          start_value?: number | null
+          target_date?: string | null
+          target_value?: number
+          title?: string
+          unit?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       measurements: {
         Row: {
           bat_speed_mph: number | null
@@ -62,48 +190,356 @@ export type Database = {
         }
         Relationships: []
       }
+      metric_entries: {
+        Row: {
+          created_at: string
+          id: string
+          metric: string
+          notes: string | null
+          recorded_on: string
+          setting: string
+          unit: string
+          user_id: string
+          value: number
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metric: string
+          notes?: string | null
+          recorded_on?: string
+          setting?: string
+          unit: string
+          user_id: string
+          value: number
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metric?: string
+          notes?: string | null
+          recorded_on?: string
+          setting?: string
+          unit?: string
+          user_id?: string
+          value?: number
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      personal_records: {
+        Row: {
+          achieved_on: string
+          created_at: string
+          id: string
+          metric: string
+          previous_value: number | null
+          unit: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          achieved_on?: string
+          created_at?: string
+          id?: string
+          metric: string
+          previous_value?: number | null
+          unit: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          achieved_on?: string
+          created_at?: string
+          id?: string
+          metric?: string
+          previous_value?: number | null
+          unit?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
+          account_type: string
           age: number | null
           avatar_url: string | null
           bats: string | null
           created_at: string
           full_name: string | null
+          grad_year: number | null
           height_in: number | null
+          hidden_metrics: string[]
           id: string
+          jersey_number: string | null
+          onboarded: boolean
           positions: string[] | null
+          profile_visibility: string
+          secondary_positions: string[] | null
+          share_metrics: boolean
           team: string | null
           throws: string | null
           updated_at: string
           weight_lb: number | null
         }
         Insert: {
+          account_type?: string
           age?: number | null
           avatar_url?: string | null
           bats?: string | null
           created_at?: string
           full_name?: string | null
+          grad_year?: number | null
           height_in?: number | null
+          hidden_metrics?: string[]
           id: string
+          jersey_number?: string | null
+          onboarded?: boolean
           positions?: string[] | null
+          profile_visibility?: string
+          secondary_positions?: string[] | null
+          share_metrics?: boolean
           team?: string | null
           throws?: string | null
           updated_at?: string
           weight_lb?: number | null
         }
         Update: {
+          account_type?: string
           age?: number | null
           avatar_url?: string | null
           bats?: string | null
           created_at?: string
           full_name?: string | null
+          grad_year?: number | null
           height_in?: number | null
+          hidden_metrics?: string[]
           id?: string
+          jersey_number?: string | null
+          onboarded?: boolean
           positions?: string[] | null
+          profile_visibility?: string
+          secondary_positions?: string[] | null
+          share_metrics?: boolean
           team?: string | null
           throws?: string | null
           updated_at?: string
           weight_lb?: number | null
+        }
+        Relationships: []
+      }
+      team_announcements: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          team_id: string
+          title: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          team_id: string
+          title: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          team_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_announcements_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_invitations: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          invited_by: string
+          status: string
+          team_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          invited_by: string
+          status?: string
+          team_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          invited_by?: string
+          status?: string
+          team_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_invitations_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_join_requests: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          status: string
+          team_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          status?: string
+          team_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          status?: string
+          team_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_join_requests_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_members: {
+        Row: {
+          created_at: string
+          id: string
+          jersey_number: string | null
+          position: string | null
+          team_id: string
+          team_role: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          jersey_number?: string | null
+          position?: string | null
+          team_id: string
+          team_role?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          jersey_number?: string | null
+          position?: string | null
+          team_id?: string
+          team_role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          age_group: string | null
+          comparisons_visible: boolean
+          created_at: string
+          id: string
+          join_code: string
+          logo_url: string | null
+          name: string
+          organization: string | null
+          owner_id: string
+          season: string | null
+          updated_at: string
+        }
+        Insert: {
+          age_group?: string | null
+          comparisons_visible?: boolean
+          created_at?: string
+          id?: string
+          join_code: string
+          logo_url?: string | null
+          name: string
+          organization?: string | null
+          owner_id: string
+          season?: string | null
+          updated_at?: string
+        }
+        Update: {
+          age_group?: string | null
+          comparisons_visible?: boolean
+          created_at?: string
+          id?: string
+          join_code?: string
+          logo_url?: string | null
+          name?: string
+          organization?: string | null
+          owner_id?: string
+          season?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -148,13 +584,77 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      coach_feedback_for_player: {
+        Row: {
+          area_to_improve: string | null
+          coach_id: string | null
+          created_at: string | null
+          id: string | null
+          player_id: string | null
+          player_note: string | null
+          recommended_drill: string | null
+          strength: string | null
+          team_id: string | null
+          weekly_focus: string | null
+        }
+        Insert: {
+          area_to_improve?: string | null
+          coach_id?: string | null
+          created_at?: string | null
+          id?: string | null
+          player_id?: string | null
+          player_note?: string | null
+          recommended_drill?: string | null
+          strength?: string | null
+          team_id?: string | null
+          weekly_focus?: string | null
+        }
+        Update: {
+          area_to_improve?: string | null
+          coach_id?: string | null
+          created_at?: string | null
+          id?: string | null
+          player_id?: string | null
+          player_note?: string | null
+          recommended_drill?: string | null
+          strength?: string | null
+          team_id?: string | null
+          weekly_focus?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_feedback_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      can_view_metrics: {
+        Args: { _owner: string; _viewer: string }
+        Returns: boolean
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_team_coach: {
+        Args: { _team_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_team_member: {
+        Args: { _team_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "player" | "parent" | "coach" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -281,6 +781,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["player", "parent", "coach", "admin"],
+    },
   },
 } as const

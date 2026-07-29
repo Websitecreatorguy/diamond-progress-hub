@@ -43,6 +43,7 @@ import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average
 import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
 import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedMetricsRouteImport } from './routes/_authenticated/metrics'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
 
@@ -221,6 +222,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMetricsRoute = AuthenticatedMetricsRouteImport.update({
+  id: '/metrics',
+  path: '/metrics',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -260,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/metrics': typeof AuthenticatedMetricsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/training': typeof AuthenticatedTrainingRoute
@@ -297,6 +304,7 @@ export interface FileRoutesByTo {
   '/teams': typeof TeamsRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/metrics': typeof AuthenticatedMetricsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/progress': typeof AuthenticatedProgressRoute
   '/training': typeof AuthenticatedTrainingRoute
@@ -336,6 +344,7 @@ export interface FileRoutesById {
   '/teams': typeof TeamsRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/metrics': typeof AuthenticatedMetricsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/progress': typeof AuthenticatedProgressRoute
   '/_authenticated/training': typeof AuthenticatedTrainingRoute
@@ -375,6 +384,7 @@ export interface FileRouteTypes {
     | '/teams'
     | '/charts'
     | '/dashboard'
+    | '/metrics'
     | '/profile'
     | '/progress'
     | '/training'
@@ -412,6 +422,7 @@ export interface FileRouteTypes {
     | '/teams'
     | '/charts'
     | '/dashboard'
+    | '/metrics'
     | '/profile'
     | '/progress'
     | '/training'
@@ -450,6 +461,7 @@ export interface FileRouteTypes {
     | '/teams'
     | '/_authenticated/charts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/metrics'
     | '/_authenticated/profile'
     | '/_authenticated/progress'
     | '/_authenticated/training'
@@ -734,6 +746,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/metrics': {
+      id: '/_authenticated/metrics'
+      path: '/metrics'
+      fullPath: '/metrics'
+      preLoaderRoute: typeof AuthenticatedMetricsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -754,6 +773,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChartsRoute: typeof AuthenticatedChartsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedMetricsRoute: typeof AuthenticatedMetricsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
   AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
@@ -762,6 +782,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChartsRoute: AuthenticatedChartsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedMetricsRoute: AuthenticatedMetricsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProgressRoute: AuthenticatedProgressRoute,
   AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,

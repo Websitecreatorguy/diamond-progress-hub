@@ -52,7 +52,7 @@ function CoachPage() {
       const code = Array.from({ length: 6 }, () => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random() * 32)]).join("");
       const { data: t, error } = await supabase
         .from("teams")
-        .insert({ name: name.trim(), join_code: code, created_by: u.user.id })
+        .insert({ name: name.trim(), join_code: code })
         .select("id")
         .single();
       if (error) throw error;
@@ -97,7 +97,7 @@ function CoachPage() {
       const { data: u } = await supabase.auth.getUser();
       const { error } = await supabase
         .from("team_announcements")
-        .insert({ team_id: team.id, title: ann.title.trim(), body: ann.body.trim(), created_by: u.user!.id });
+        .insert({ team_id: team.id, title: ann.title.trim(), body: ann.body.trim(), author_id: u.user!.id });
       if (error) throw error;
     },
     onSuccess: () => {

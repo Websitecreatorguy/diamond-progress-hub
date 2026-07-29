@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Diamond Development — The Baseball Development Platform" },
       {
         property: "og:description",
-        content: "Track exit velocity, bat speed, and pitching velo. Personalized workouts, team leaderboards, verified stats.",
+        content: "Track exit velocity, pitch velocity, bat speed, and every metric that matters. Diamond Development is the training and analytics platform built for baseball players, coaches, and parents.",
       },
       { property: "og:url", content: SITE_URL + "/" },
       { property: "og:type", content: "website" },

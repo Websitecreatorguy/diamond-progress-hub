@@ -52,7 +52,7 @@ function CoachPage() {
       const code = Array.from({ length: 6 }, () => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random() * 32)]).join("");
       const { data: t, error } = await supabase
         .from("teams")
-        .insert({ name: name.trim(), join_code: code })
+        .insert({ name: name.trim(), join_code: code, owner_id: u.user.id })
         .select("id")
         .single();
       if (error) throw error;

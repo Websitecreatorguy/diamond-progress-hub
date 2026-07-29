@@ -1,254 +1,476 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
+import { format, parseISO } from "date-fns";
+import {
+  Activity,
+  ArrowRight,
+  CalendarDays,
+  CheckCircle2,
+  Plus,
+  Target,
+  Trophy,
+  Users,
+  UserCog,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { AppShell } from "@/components/app-shell";
+import { AppShell, EmptyState } from "@/components/app-shell";
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Flame, Trophy, Target, Zap, CheckCircle2 } from "lucide-react";
-import { format, startOfWeek, endOfWeek, subDays } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AddResultDialog } from "@/components/dashboard/add-result-dialog";
+import { GoalDialog, goalProgress } from "@/components/dashboard/goal-dialog";
+import { useMemberships, useProfile } from "@/hooks/use-app-user";
+import {
+  METRIC_MAP,
+  formatMetric,
+  improvementDelta,
+  relevantMetrics,
+} from "@/lib/metrics";
 import { todayQuote } from "@/lib/motivation";
-import { Link } from "@tanstack/react-router";
+import type { Tables } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — Diamond Development" }] }),
+  head: () => ({
+    meta: [
+      { title: "Player Dashboard — Diamond Development" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: Dashboard,
 });
 
-type Workout = {
-  id: string;
-  scheduled_date: string;
-  category: string;
-  title: string;
-  completed: boolean;
-};
+type Entry = Tables<"metric_entries">;
 
 function Dashboard() {
-  const qc = useQueryClient();
-  const today = format(new Date(), "yyyy-MM-dd");
-  const weekStart = format(startOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd");
-  const weekEnd = format(endOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd");
+  const [addOpen, setAddOpen] = useState(false);
+  const [goalOpen, setGoalOpen] = useState(false);
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: memberships = [] } = useMemberships();
 
-  const { data: profile } = useQuery({
-    queryKey: ["profile"],
+  const { data: entries = [], isLoading: entriesLoading } = useQuery<Entry[]>({
+    queryKey: ["metric-entries"],
     queryFn: async () => {
-      const { data } = await supabase.from("profiles").select("*").maybeSingle();
-      return data;
-    },
-  });
-
-  const { data: todays = [] } = useQuery<Workout[]>({
-    queryKey: ["workouts", "today", today],
-    queryFn: async () => {
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return [];
       const { data } = await supabase
-        .from("workouts")
+        .from("metric_entries")
         .select("*")
-        .eq("scheduled_date", today)
-        .order("created_at");
-      return (data ?? []) as Workout[];
+        .eq("user_id", u.user.id)
+        .order("recorded_on", { ascending: false });
+      return (data ?? []) as Entry[];
     },
   });
 
-  const { data: week = [] } = useQuery<Workout[]>({
-    queryKey: ["workouts", "week", weekStart],
+  const { data: records = [] } = useQuery({
+    queryKey: ["personal-records"],
     queryFn: async () => {
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return [];
       const { data } = await supabase
-        .from("workouts")
+        .from("personal_records")
         .select("*")
-        .gte("scheduled_date", weekStart)
-        .lte("scheduled_date", weekEnd);
-      return (data ?? []) as Workout[];
+        .eq("user_id", u.user.id)
+        .order("achieved_on", { ascending: false });
+      return data ?? [];
     },
   });
 
-  const { data: streak = 0 } = useQuery({
-    queryKey: ["streak"],
+  const { data: goals = [] } = useQuery({
+    queryKey: ["goals"],
     queryFn: async () => {
-      const since = format(subDays(new Date(), 60), "yyyy-MM-dd");
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return [];
       const { data } = await supabase
-        .from("workouts")
-        .select("scheduled_date, completed")
-        .gte("scheduled_date", since)
-        .eq("completed", true)
-        .order("scheduled_date", { ascending: false });
-      const done = new Set((data ?? []).map((w) => w.scheduled_date as string));
-      let s = 0;
-      for (let i = 0; i < 60; i++) {
-        const d = format(subDays(new Date(), i), "yyyy-MM-dd");
-        if (done.has(d)) s++;
-        else if (i > 0) break;
-      }
-      return s;
+        .from("goals")
+        .select("*")
+        .eq("user_id", u.user.id)
+        .order("created_at", { ascending: false });
+      return data ?? [];
     },
   });
 
-  const { data: totalDone = 0 } = useQuery({
-    queryKey: ["totalWorkouts"],
+  const { data: activity = [] } = useQuery({
+    queryKey: ["activity"],
     queryFn: async () => {
-      const { count } = await supabase
-        .from("workouts")
-        .select("*", { count: "exact", head: true })
-        .eq("completed", true);
-      return count ?? 0;
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return [];
+      const { data } = await supabase
+        .from("activity_log")
+        .select("*")
+        .eq("user_id", u.user.id)
+        .order("created_at", { ascending: false })
+        .limit(8);
+      return data ?? [];
     },
   });
 
-  const toggle = useMutation({
-    mutationFn: async (w: Workout) => {
-      const { error } = await supabase
-        .from("workouts")
-        .update({
-          completed: !w.completed,
-          completed_at: !w.completed ? new Date().toISOString() : null,
-        })
-        .eq("id", w.id);
-      if (error) throw error;
-    },
-    onSuccess: () => qc.invalidateQueries(),
-  });
+  const byMetric = useMemo(() => {
+    const map = new Map<string, Entry[]>();
+    for (const e of entries) {
+      const list = map.get(e.metric) ?? [];
+      list.push(e);
+      map.set(e.metric, list);
+    }
+    return map;
+  }, [entries]);
 
-  const doneWeek = week.filter((w) => w.completed).length;
-  const weekPct = week.length ? Math.round((doneWeek / week.length) * 100) : 0;
+  const cards = useMemo(() => {
+    const defs = relevantMetrics(profile?.positions);
+    return defs
+      .map((d) => {
+        const list = byMetric.get(d.key) ?? [];
+        const pr = records.find((r) => r.metric === d.key);
+        return { def: d, current: list[0], previous: list[1], pr };
+      })
+      .filter((c) => c.current || ["exit_velo", "throw_velo", "sixty_yd", "height", "weight"].includes(c.def.key));
+  }, [profile?.positions, byMetric, records]);
 
-  const achievements = [
-    { unlocked: totalDone >= 1, label: "First Workout", icon: Zap },
-    { unlocked: streak >= 7, label: "7-Day Streak", icon: Flame },
-    { unlocked: totalDone >= 30, label: "30 Workouts", icon: Trophy },
-  ];
+  const completion = useMemo(() => {
+    if (!profile) return 0;
+    const fields = [
+      profile.full_name,
+      profile.age,
+      profile.team,
+      profile.positions?.length,
+      profile.height_in,
+      profile.weight_lb,
+      profile.bats,
+      profile.throws,
+      profile.grad_year,
+      profile.jersey_number,
+    ];
+    return Math.round((fields.filter(Boolean).length / fields.length) * 100);
+  }, [profile]);
+
+  const team = memberships[0]?.teams ?? null;
+  const activeGoals = goals.filter((g) => !g.completed).slice(0, 3);
 
   return (
-    <AppShell title="Dashboard">
-      <section className="rounded-3xl bg-gradient-field p-6 text-primary-foreground shadow-glow">
-        <div className="text-xs uppercase tracking-widest opacity-75">
-          Hey {profile?.full_name?.split(" ")[0] ?? "Player"}
-        </div>
-        <h1 className="mt-1 text-2xl font-bold leading-tight">"{todayQuote()}"</h1>
-        <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-          <Stat label="Streak" value={`${streak}`} unit="days" icon={<Flame className="h-4 w-4" />} />
-          <Stat label="This week" value={`${weekPct}%`} unit="done" />
-          <Stat label="Total" value={`${totalDone}`} unit="workouts" />
-        </div>
-      </section>
-
-      <section className="mt-5">
-        <Card className="rounded-2xl border-border p-5 shadow-card">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Today's Plan
-            </h2>
-            <Link to="/training" className="text-xs font-medium text-primary hover:underline">
-              Edit plan →
+    <AppShell
+      title={`Hey ${profile?.full_name?.split(" ")[0] ?? "Player"}`}
+      description={todayQuote()}
+      actions={
+        <>
+          <Button className="bg-gradient-primary shadow-glow" onClick={() => setAddOpen(true)}>
+            <Plus className="mr-1.5 h-4 w-4" /> Add Result
+          </Button>
+          <Button variant="outline" onClick={() => setGoalOpen(true)}>
+            <Target className="mr-1.5 h-4 w-4" /> Create Goal
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/team">
+              <Users className="mr-1.5 h-4 w-4" /> {team ? "View Team" : "Join Team"}
             </Link>
+          </Button>
+          <Button asChild variant="ghost">
+            <Link to="/profile">
+              <UserCog className="mr-1.5 h-4 w-4" /> Edit Player Profile
+            </Link>
+          </Button>
+        </>
+      }
+    >
+      <AddResultDialog open={addOpen} onOpenChange={setAddOpen} />
+      <GoalDialog open={goalOpen} onOpenChange={setGoalOpen} />
+
+      {/* Player overview */}
+      <Card className="rounded-2xl border-border p-5 shadow-card sm:p-6">
+        {profileLoading ? (
+          <div className="flex gap-4">
+            <Skeleton className="h-20 w-20 rounded-2xl" />
+            <div className="flex-1 space-y-2">
+              <Skeleton className="h-5 w-48" />
+              <Skeleton className="h-4 w-64" />
+            </div>
           </div>
-          {todays.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border py-8 text-center text-sm text-muted-foreground">
-              No workouts scheduled today.
-              <div className="mt-3">
-                <Button asChild size="sm" className="bg-gradient-primary">
-                  <Link to="/training">Plan today</Link>
-                </Button>
+        ) : (
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <div className="flex items-center gap-4">
+              {profile?.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt={profile.full_name ?? "Player avatar"}
+                  className="h-20 w-20 rounded-2xl object-cover shadow-glow"
+                />
+              ) : (
+                <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-gradient-primary text-3xl font-black text-primary-foreground shadow-glow">
+                  {(profile?.full_name ?? "P").charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="sm:hidden">
+                <div className="text-lg font-bold">{profile?.full_name || "Your name"}</div>
+                <div className="text-xs text-muted-foreground">{team?.name ?? profile?.team ?? "No team yet"}</div>
               </div>
             </div>
-          ) : (
-            <ul className="space-y-2">
-              {todays.map((w) => (
-                <li
-                  key={w.id}
-                  className="flex items-center gap-3 rounded-xl bg-secondary/60 px-3 py-3"
-                >
-                  <Checkbox
-                    checked={w.completed}
-                    onCheckedChange={() => toggle.mutate(w)}
-                    className="h-5 w-5"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <div
-                      className={`truncate text-sm font-medium ${w.completed ? "text-muted-foreground line-through" : ""}`}
-                    >
-                      {w.title}
+
+            <div className="min-w-0 flex-1">
+              <div className="hidden items-center gap-2 sm:flex">
+                <span className="text-xl font-bold">{profile?.full_name || "Your name"}</span>
+                {profile?.jersey_number && <Badge variant="secondary">#{profile.jersey_number}</Badge>}
+                {profile?.account_type && (
+                  <Badge variant="outline" className="capitalize">
+                    {profile.account_type}
+                  </Badge>
+                )}
+              </div>
+              <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-4">
+                <Field label="Age" value={profile?.age ? `${profile.age}` : "—"} />
+                <Field label="Grad year" value={profile?.grad_year ? `${profile.grad_year}` : "—"} />
+                <Field label="Team" value={team?.name ?? profile?.team ?? "—"} />
+                <Field label="Jersey" value={profile?.jersey_number ? `#${profile.jersey_number}` : "—"} />
+                <Field label="Primary" value={profile?.positions?.[0] ?? "—"} />
+                <Field
+                  label="Secondary"
+                  value={
+                    profile?.secondary_positions?.length
+                      ? profile.secondary_positions.join(", ")
+                      : profile?.positions?.slice(1).join(", ") || "—"
+                  }
+                />
+                <Field label="Bats / Throws" value={`${profile?.bats ?? "—"} / ${profile?.throws ?? "—"}`} />
+                <Field
+                  label="Height / Weight"
+                  value={`${profile?.height_in ? `${Math.floor(Number(profile.height_in) / 12)}'${Math.round(Number(profile.height_in) % 12)}"` : "—"} · ${profile?.weight_lb ? `${profile.weight_lb} lb` : "—"}`}
+                />
+              </dl>
+
+              <div className="mt-4">
+                <div className="mb-1.5 flex items-center justify-between text-xs">
+                  <span className="font-medium text-muted-foreground">Profile completion</span>
+                  <span className="font-semibold text-primary">{completion}%</span>
+                </div>
+                <Progress value={completion} className="h-2" />
+              </div>
+            </div>
+
+            <Button asChild variant="outline" size="sm" className="shrink-0">
+              <Link to="/profile">Edit Profile</Link>
+            </Button>
+          </div>
+        )}
+      </Card>
+
+      {/* Metrics */}
+      <section className="mt-6">
+        <SectionHeader title="Development metrics" to="/metrics" label="All metrics" />
+        {entriesLoading ? (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[0, 1, 2].map((i) => (
+              <Skeleton key={i} className="h-32 rounded-2xl" />
+            ))}
+          </div>
+        ) : entries.length === 0 ? (
+          <EmptyState
+            icon={Activity}
+            title="No results yet"
+            description="Start tracking your baseball development by adding your first result."
+          >
+            <Button className="bg-gradient-primary shadow-glow" onClick={() => setAddOpen(true)}>
+              Add Pitch Velocity
+            </Button>
+            <Button variant="outline" onClick={() => setAddOpen(true)}>
+              Add Exit Velocity
+            </Button>
+            <Button variant="outline" onClick={() => setAddOpen(true)}>
+              Add Sprint Time
+            </Button>
+          </EmptyState>
+        ) : (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map(({ def, current, previous, pr }) => {
+              const cur = current ? Number(current.value) : null;
+              const prev = previous ? Number(previous.value) : null;
+              const delta = cur !== null && prev !== null ? improvementDelta(def.key, cur, prev) : null;
+              return (
+                <Card key={def.key} className="rounded-2xl border-border p-4 shadow-card">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {def.label}
                     </div>
-                    <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                      {w.category}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="-mr-1 -mt-1 h-7 w-7"
+                      aria-label={`Add ${def.label} result`}
+                      onClick={() => setAddOpen(true)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="mt-1 flex items-baseline gap-1.5">
+                    <span className="text-3xl font-black tracking-tight">
+                      {cur !== null ? formatMetric(def.key, cur) : "—"}
+                    </span>
+                    <span className="text-sm text-muted-foreground">{def.unit}</span>
+                    {delta !== null && delta !== 0 && (
+                      <span
+                        className={`ml-auto text-xs font-semibold ${delta > 0 ? "text-success" : "text-muted-foreground"}`}
+                      >
+                        {delta > 0 ? "+" : ""}
+                        {delta.toFixed(def.decimals)}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground">
+                    <div>
+                      Previous:{" "}
+                      <span className="font-medium text-foreground">
+                        {prev !== null ? formatMetric(def.key, prev) : "—"}
+                      </span>
+                    </div>
+                    <div>
+                      PR:{" "}
+                      <span className="font-medium text-foreground">
+                        {pr ? formatMetric(def.key, Number(pr.value)) : "—"}
+                      </span>
+                    </div>
+                    <div className="col-span-2">
+                      {current ? `Recorded ${format(parseISO(current.recorded_on), "MMM d, yyyy")}` : "No result yet"}
                     </div>
                   </div>
-                  {w.completed && <CheckCircle2 className="h-4 w-4 text-success" />}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </section>
-
-      <section className="mt-5">
-        <Card className="rounded-2xl border-border p-5 shadow-card">
-          <div className="mb-2 flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Weekly progress
-            </h2>
-            <span className="text-sm font-semibold text-primary">
-              {doneWeek} / {week.length || 0}
-            </span>
+                </Card>
+              );
+            })}
           </div>
-          <Progress value={weekPct} className="h-3" />
-          <p className="mt-3 text-xs text-muted-foreground">
-            Keep going. {week.length - doneWeek} workouts left this week.
-          </p>
-        </Card>
+        )}
       </section>
 
-      <section className="mt-5 grid gap-3 sm:grid-cols-2">
-        <Card className="rounded-2xl border-border p-5 shadow-card">
-          <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold">
-            <Target className="h-4 w-4 text-primary" /> Current Goal
-          </h3>
-          <p className="text-sm font-medium">Reach 80 mph exit velocity</p>
-          <Progress value={60} className="mt-3 h-2" />
-          <p className="mt-2 text-xs text-muted-foreground">60% there. Trust the process.</p>
-        </Card>
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        {/* Personal records */}
+        <section>
+          <SectionHeader title="Personal records" to="/records" label="All records" />
+          {records.length === 0 ? (
+            <EmptyState icon={Trophy} title="No records yet" description="Your best result for each metric shows up here." >
+              <Button className="bg-gradient-primary shadow-glow" onClick={() => setAddOpen(true)}>
+                Add first result
+              </Button>
+            </EmptyState>
+          ) : (
+            <Card className="divide-y divide-border rounded-2xl border-border shadow-card">
+              {records.slice(0, 5).map((r) => {
+                const def = METRIC_MAP[r.metric];
+                const prev = r.previous_value === null ? null : Number(r.previous_value);
+                const gain = prev !== null ? improvementDelta(r.metric, Number(r.value), prev) : null;
+                return (
+                  <div key={r.id} className="flex items-center gap-3 px-4 py-3">
+                    <Trophy className="h-4 w-4 shrink-0 text-warning" />
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-sm font-semibold">{def?.label ?? r.metric}</div>
+                      <div className="text-[11px] text-muted-foreground">
+                        {format(parseISO(r.achieved_on), "MMM d, yyyy")}
+                        {gain !== null && gain > 0 && ` · +${gain.toFixed(def?.decimals ?? 1)} ${r.unit} improvement`}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-black">{formatMetric(r.metric, Number(r.value))}</div>
+                      <div className="text-[10px] uppercase text-muted-foreground">{r.unit}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </Card>
+          )}
+        </section>
 
-        <Card className="rounded-2xl border-border p-5 shadow-card">
-          <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-            <Trophy className="h-4 w-4 text-warning" /> Achievements
-          </h3>
-          <ul className="space-y-2 text-sm">
-            {achievements.map((a) => (
-              <li
-                key={a.label}
-                className={`flex items-center gap-2 ${a.unlocked ? "" : "opacity-40"}`}
-              >
-                <a.icon className="h-4 w-4 text-primary" />
-                {a.label}
-                {a.unlocked && <CheckCircle2 className="ml-auto h-4 w-4 text-success" />}
-              </li>
+        {/* Goals */}
+        <section>
+          <SectionHeader title="Goals" to="/goals" label="All goals" />
+          {activeGoals.length === 0 ? (
+            <EmptyState
+              icon={Target}
+              title="No goals yet"
+              description="Create a goal and track your progress throughout the season."
+            >
+              <Button className="bg-gradient-primary shadow-glow" onClick={() => setGoalOpen(true)}>
+                Create First Goal
+              </Button>
+            </EmptyState>
+          ) : (
+            <div className="space-y-3">
+              {activeGoals.map((g) => {
+                const pct = goalProgress(g);
+                return (
+                  <Card key={g.id} className="rounded-2xl border-border p-4 shadow-card">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="truncate text-sm font-semibold">{g.title}</div>
+                        <div className="text-[11px] text-muted-foreground">
+                          {g.current_value !== null ? formatMetric(g.metric ?? "", Number(g.current_value)) : "—"} /{" "}
+                          {formatMetric(g.metric ?? "", Number(g.target_value))} {g.unit}
+                          {g.target_date && ` · by ${format(parseISO(g.target_date), "MMM d, yyyy")}`}
+                        </div>
+                      </div>
+                      <span className="text-sm font-bold text-primary">{pct}%</span>
+                    </div>
+                    <Progress value={pct} className="mt-3 h-2" />
+                  </Card>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </div>
+
+      {/* Recent activity */}
+      <section className="mt-6">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+          Recent activity
+        </h2>
+        {activity.length === 0 ? (
+          <EmptyState
+            icon={CalendarDays}
+            title="Nothing here yet"
+            description="Results, records, goals and team updates will appear here."
+          />
+        ) : (
+          <Card className="divide-y divide-border rounded-2xl border-border shadow-card">
+            {activity.map((a) => (
+              <div key={a.id} className="flex items-start gap-3 px-4 py-3">
+                <ActivityIcon kind={a.kind} />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-medium">{a.title}</div>
+                  {a.detail && <div className="text-[11px] text-muted-foreground">{a.detail}</div>}
+                </div>
+                <div className="shrink-0 text-[11px] text-muted-foreground">
+                  {format(new Date(a.created_at), "MMM d")}
+                </div>
+              </div>
             ))}
-          </ul>
-        </Card>
+          </Card>
+        )}
       </section>
     </AppShell>
   );
 }
 
-function Stat({
-  label,
-  value,
-  unit,
-  icon,
-}: {
-  label: string;
-  value: string;
-  unit: string;
-  icon?: React.ReactNode;
-}) {
+function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-white/10 p-3 backdrop-blur">
-      <div className="flex items-center justify-center gap-1 text-2xl font-black">
-        {icon}
-        {value}
-      </div>
-      <div className="text-[10px] uppercase tracking-widest opacity-75">
-        {label} · {unit}
-      </div>
+    <div>
+      <dt className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</dt>
+      <dd className="truncate font-medium">{value}</dd>
     </div>
   );
+}
+
+function SectionHeader({ title, to, label }: { title: string; to: string; label: string }) {
+  return (
+    <div className="mb-3 flex items-center justify-between">
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{title}</h2>
+      <Link to={to} className="flex items-center gap-1 text-xs font-medium text-primary hover:underline">
+        {label} <ArrowRight className="h-3 w-3" />
+      </Link>
+    </div>
+  );
+}
+
+function ActivityIcon({ kind }: { kind: string }) {
+  const cls = "h-4 w-4 shrink-0 mt-0.5";
+  if (kind === "record") return <Trophy className={`${cls} text-warning`} />;
+  if (kind === "goal_completed") return <CheckCircle2 className={`${cls} text-success`} />;
+  if (kind === "goal_created") return <Target className={`${cls} text-primary`} />;
+  if (kind.startsWith("team")) return <Users className={`${cls} text-primary`} />;
+  return <Activity className={`${cls} text-muted-foreground`} />;
 }

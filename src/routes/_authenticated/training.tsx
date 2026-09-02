@@ -12,7 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Trash2, Sparkles, Info } from "lucide-react";
+import { Plus, Trash2, Sparkles, Info, Dumbbell } from "lucide-react";
 import { format, startOfWeek, addDays } from "date-fns";
 import { CATEGORIES, type Category } from "@/lib/motivation";
 import {
@@ -24,6 +24,7 @@ import {
 } from "@/lib/program";
 import { encouragement, milestoneFor } from "@/lib/encouragement";
 import { DrillSheet } from "@/components/drill-sheet";
+import { RoutineLibrary } from "@/components/routine-library";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/training")({
@@ -199,7 +200,10 @@ function Training() {
               pending={generate.isPending}
               onGenerate={(replace) => generate.mutate({ replace })}
             />
-            <AddWorkoutDialog defaultDate={format(new Date(), "yyyy-MM-dd")} compact />
+            <div className="flex items-center gap-1">
+              <RoutineLibrary defaultDate={format(new Date(), "yyyy-MM-dd")} />
+              <AddWorkoutDialog defaultDate={format(new Date(), "yyyy-MM-dd")} compact />
+            </div>
           </div>
         </div>
         <Progress value={pct} className="mt-4 h-3" />
@@ -242,7 +246,17 @@ function Training() {
                     </Badge>
                   )}
                 </div>
-                <AddWorkoutDialog defaultDate={key} compact />
+                <div className="flex items-center gap-1">
+                  <RoutineLibrary
+                    defaultDate={key}
+                    trigger={
+                      <Button variant="ghost" size="sm" className="text-muted-foreground">
+                        <Dumbbell className="mr-1 h-4 w-4" /> Routine
+                      </Button>
+                    }
+                  />
+                  <AddWorkoutDialog defaultDate={key} compact />
+                </div>
               </div>
               {list.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-border py-4 text-center text-xs text-muted-foreground">

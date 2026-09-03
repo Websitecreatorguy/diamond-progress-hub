@@ -41,6 +41,87 @@ export type Database = {
         }
         Relationships: []
       }
+      assignment_completions: {
+        Row: {
+          assignment_id: string
+          completed_at: string
+          id: string
+          note: string | null
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          assignment_id: string
+          completed_at?: string
+          id?: string
+          note?: string | null
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          assignment_id?: string
+          completed_at?: string
+          id?: string
+          note?: string | null
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignment_completions_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "team_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assignment_completions_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assignment_targets: {
+        Row: {
+          assignment_id: string
+          created_at: string
+          id: string
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          assignment_id: string
+          created_at?: string
+          id?: string
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          assignment_id?: string
+          created_at?: string
+          id?: string
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignment_targets_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "team_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assignment_targets_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       coach_feedback: {
         Row: {
           area_to_improve: string | null
@@ -331,6 +412,45 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean
+          created_at: string
+          current_period_end: string | null
+          id: string
+          plan: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          plan?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          plan?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       team_announcements: {
         Row: {
           author_id: string
@@ -359,6 +479,53 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "team_announcements_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_assignments: {
+        Row: {
+          assign_all: boolean
+          category: string
+          coach_id: string
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          team_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assign_all?: boolean
+          category?: string
+          coach_id: string
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          team_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assign_all?: boolean
+          category?: string
+          coach_id?: string
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          team_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_assignments_team_id_fkey"
             columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
@@ -448,6 +615,7 @@ export type Database = {
           id: string
           jersey_number: string | null
           position: string | null
+          secondary_positions: string[]
           team_id: string
           team_role: string
           user_id: string
@@ -457,6 +625,7 @@ export type Database = {
           id?: string
           jersey_number?: string | null
           position?: string | null
+          secondary_positions?: string[]
           team_id: string
           team_role?: string
           user_id: string
@@ -466,6 +635,7 @@ export type Database = {
           id?: string
           jersey_number?: string | null
           position?: string | null
+          secondary_positions?: string[]
           team_id?: string
           team_role?: string
           user_id?: string
@@ -480,45 +650,228 @@ export type Database = {
           },
         ]
       }
-      teams: {
+      team_message_reactions: {
         Row: {
-          age_group: string | null
-          comparisons_visible: boolean
+          created_at: string
+          emoji: string
+          id: string
+          message_id: string
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          emoji: string
+          id?: string
+          message_id: string
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          emoji?: string
+          id?: string
+          message_id?: string
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_message_reactions_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "team_messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "team_message_reactions_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_message_reports: {
+        Row: {
           created_at: string
           id: string
-          join_code: string
-          logo_url: string | null
-          name: string
-          organization: string | null
-          owner_id: string
-          season: string | null
+          message_id: string
+          reason: string | null
+          reporter_id: string
+          resolved: boolean
+          team_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_id: string
+          reason?: string | null
+          reporter_id: string
+          resolved?: boolean
+          team_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_id?: string
+          reason?: string | null
+          reporter_id?: string
+          resolved?: boolean
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_message_reports_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "team_messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "team_message_reports_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_messages: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          deleted_at: string | null
+          id: string
+          kind: string
+          pinned: boolean
+          reply_to: string | null
+          team_id: string
           updated_at: string
         }
         Insert: {
-          age_group?: string | null
-          comparisons_visible?: boolean
+          author_id: string
+          body: string
           created_at?: string
+          deleted_at?: string | null
           id?: string
-          join_code: string
-          logo_url?: string | null
-          name: string
-          organization?: string | null
-          owner_id: string
-          season?: string | null
+          kind?: string
+          pinned?: boolean
+          reply_to?: string | null
+          team_id: string
           updated_at?: string
         }
         Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          kind?: string
+          pinned?: boolean
+          reply_to?: string | null
+          team_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_messages_reply_to_fkey"
+            columns: ["reply_to"]
+            isOneToOne: false
+            referencedRelation: "team_messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "team_messages_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          age_group: string | null
+          announcements_enabled: boolean
+          assistant_coaches: string[]
+          chat_enabled: boolean
+          chat_locked: boolean
+          city: string | null
+          comparisons_visible: boolean
+          created_at: string
+          description: string | null
+          head_coach_name: string | null
+          id: string
+          join_code: string
+          locker_post_policy: string
+          logo_url: string | null
+          member_list_visible: boolean
+          name: string
+          organization: string | null
+          owner_id: string
+          practice_location: string | null
+          season: string | null
+          state: string | null
+          team_level: string | null
+          updated_at: string
+          visible_metrics: string[]
+          website_url: string | null
+        }
+        Insert: {
           age_group?: string | null
+          announcements_enabled?: boolean
+          assistant_coaches?: string[]
+          chat_enabled?: boolean
+          chat_locked?: boolean
+          city?: string | null
           comparisons_visible?: boolean
           created_at?: string
+          description?: string | null
+          head_coach_name?: string | null
+          id?: string
+          join_code: string
+          locker_post_policy?: string
+          logo_url?: string | null
+          member_list_visible?: boolean
+          name: string
+          organization?: string | null
+          owner_id: string
+          practice_location?: string | null
+          season?: string | null
+          state?: string | null
+          team_level?: string | null
+          updated_at?: string
+          visible_metrics?: string[]
+          website_url?: string | null
+        }
+        Update: {
+          age_group?: string | null
+          announcements_enabled?: boolean
+          assistant_coaches?: string[]
+          chat_enabled?: boolean
+          chat_locked?: boolean
+          city?: string | null
+          comparisons_visible?: boolean
+          created_at?: string
+          description?: string | null
+          head_coach_name?: string | null
           id?: string
           join_code?: string
+          locker_post_policy?: string
           logo_url?: string | null
+          member_list_visible?: boolean
           name?: string
           organization?: string | null
           owner_id?: string
+          practice_location?: string | null
           season?: string | null
+          state?: string | null
+          team_level?: string | null
           updated_at?: string
+          visible_metrics?: string[]
+          website_url?: string | null
         }
         Relationships: []
       }
@@ -633,15 +986,38 @@ export type Database = {
       }
     }
     Functions: {
+      can_post_locker: {
+        Args: { _team_id: string; _user_id: string }
+        Returns: boolean
+      }
       can_view_metrics: {
         Args: { _owner: string; _viewer: string }
         Returns: boolean
       }
+      find_team_by_join_code: {
+        Args: { _code: string }
+        Returns: {
+          age_group: string
+          city: string
+          id: string
+          logo_url: string
+          name: string
+          organization: string
+          season: string
+          state: string
+          team_level: string
+        }[]
+      }
+      has_diamond_plus: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_assignment_target: {
+        Args: { _assignment_id: string; _user_id: string }
         Returns: boolean
       }
       is_team_coach: {
@@ -651,6 +1027,21 @@ export type Database = {
       is_team_member: {
         Args: { _team_id: string; _user_id: string }
         Returns: boolean
+      }
+      list_join_requests: {
+        Args: { _team_id: string }
+        Returns: {
+          age: number
+          avatar_url: string
+          created_at: string
+          full_name: string
+          id: string
+          message: string
+          positions: string[]
+          status: string
+          team_id: string
+          user_id: string
+        }[]
       }
     }
     Enums: {

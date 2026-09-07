@@ -412,6 +412,45 @@ export type Database = {
         }
         Relationships: []
       }
+      project_requests: {
+        Row: {
+          business_name: string | null
+          business_type: string | null
+          created_at: string
+          current_website: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          needs: string | null
+          phone: string | null
+        }
+        Insert: {
+          business_name?: string | null
+          business_type?: string | null
+          created_at?: string
+          current_website?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          needs?: string | null
+          phone?: string | null
+        }
+        Update: {
+          business_name?: string | null
+          business_type?: string | null
+          created_at?: string
+          current_website?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          needs?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           cancel_at_period_end: boolean

@@ -1,35 +1,35 @@
-import logoAsset from "@/assets/diamond-logo.png.asset.json";
+import logo from "@/assets/cy-logo.png";
 import { cn } from "@/lib/utils";
-
-export const LOGO_URL = logoAsset.url;
 
 export function Logo({
   className,
   showWordmark = true,
-  size = 32,
+  size = 36,
 }: {
   className?: string;
   showWordmark?: boolean;
   size?: number;
 }) {
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
+    <span className={cn("flex items-center gap-2.5", className)}>
       <img
-        src={LOGO_URL}
-        alt="Diamond Development"
+        src={logo}
+        alt="Christian Yoo Web Design"
         width={size}
         height={size}
-        className="rounded-lg shadow-glow"
-        style={{ width: size, height: size, objectFit: "cover" }}
+        className="rounded-xl"
+        style={{ width: size, height: size, objectFit: "contain" }}
       />
       {showWordmark && (
-        <div className="leading-tight">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            Diamond
-          </div>
-          <div className="text-sm font-bold tracking-tight">Development</div>
-        </div>
+        <span className="leading-tight">
+          <span className="block font-display text-[15px] font-semibold tracking-tight">
+            Christian Yoo
+          </span>
+          <span className="block text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            Web Design
+          </span>
+        </span>
       )}
-    </div>
+    </span>
   );
 }

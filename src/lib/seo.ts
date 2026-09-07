@@ -1,7 +1,5 @@
-export const SITE_URL = "https://diamond-progress-hub.lovable.app";
-export const SITE_NAME = "Diamond Development";
-export const SITE_TAGLINE =
-  "The baseball development platform for players, coaches, and parents.";
+export { SITE_URL, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 
 export function absoluteUrl(path: string) {
   if (path.startsWith("http")) return path;

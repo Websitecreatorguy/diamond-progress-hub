@@ -79,30 +79,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#1e40af" },
-      { title: "Diamond Development | Websites for Local Businesses" },
+      { title: "Diamond Development — The Baseball Development Platform" },
       {
         name: "description",
         content:
-          "Modern, professional websites for local businesses starting at $45. Custom design, mobile-friendly, and built specifically for your business.",
+          "Track exit velocity, pitch velocity, bat speed, and every metric that matters. Diamond Development is the training and analytics platform built for baseball players, coaches, and parents.",
       },
       { property: "og:site_name", content: "Diamond Development" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Diamond Development | Websites for Local Businesses" },
-      { name: "twitter:title", content: "Diamond Development | Websites for Local Businesses" },
-      { property: "og:description", content: "Modern, professional websites for local businesses starting at $45. Mobile-friendly and built for your business." },
-      { name: "twitter:description", content: "Modern, professional websites for local businesses starting at $45. Mobile-friendly and built for your business." },
-
+      { property: "og:title", content: "Diamond Development — The Baseball Development Platform" },
+      { name: "twitter:title", content: "Diamond Development — The Baseball Development Platform" },
+      { property: "og:description", content: "Track exit velocity, pitch velocity, bat speed, and every metric that matters. Diamond Development is the training and analytics platform built for baseball players, coaches, and parents." },
+      { name: "twitter:description", content: "Track exit velocity, pitch velocity, bat speed, and every metric that matters. Diamond Development is the training and analytics platform built for baseball players, coaches, and parents." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45b7a663-d95a-4b39-8874-355763725d9a/id-preview-74942e10--65ddbd33-feba-4734-9f9a-08ce128da296.lovable.app-1785297789870.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45b7a663-d95a-4b39-8874-355763725d9a/id-preview-74942e10--65ddbd33-feba-4734-9f9a-08ce128da296.lovable.app-1785297789870.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap",
-      },
-
       { rel: "icon", href: "/__l5e/assets-v1/695f4b80-cac0-406d-9f1e-7620bbbb7f69/diamond-logo.png", type: "image/png" },
       { rel: "apple-touch-icon", href: logoAsset.url },
     ],

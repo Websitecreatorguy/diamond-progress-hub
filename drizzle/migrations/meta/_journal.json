@@ -8,6 +8,13 @@
       "when": 1791778179827,
       "tag": "0000_create_core_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791778222509,
+      "tag": "0001_create_teams_goals_metrics",
+      "breakpoints": true
     }
   ]
 }

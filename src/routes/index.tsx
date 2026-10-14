@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { MarketingLayout } from "@/components/marketing/marketing-layout";
+import { AdBanner } from "@/components/ads/ad-banner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SITE_URL } from "@/lib/seo";
@@ -60,6 +61,7 @@ function HomePage() {
   return (
     <MarketingLayout>
       <Hero />
+      <AdBanner slot="6013830221" className="mx-auto max-w-6xl px-4 py-6 sm:px-6" />
       <TrustBar />
       <Features />
       <DashboardPreview />

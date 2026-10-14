@@ -80,6 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#1e40af" },
+      { name: "google-adsense-account", content: "ca-pub-2516707010858089" },
       { title: "Diamond Development — The Baseball Development Platform" },
       {
         name: "description",

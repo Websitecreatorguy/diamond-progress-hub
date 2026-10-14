@@ -9,147 +9,77 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TeamsRouteImport } from './routes/teams'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SearchRouteImport } from './routes/search'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as PitchingVelocityByAgeRouteImport } from './routes/pitching-velocity-by-age'
-import { Route as LeaderboardsRouteImport } from './routes/leaderboards'
-import { Route as HowToThrowHarderRouteImport } from './routes/how-to-throw-harder'
-import { Route as HowToIncreaseExitVelocityRouteImport } from './routes/how-to-increase-exit-velocity'
-import { Route as FeaturesRouteImport } from './routes/features'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-workout-plans'
-import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
-import { Route as BaseballStatsRouteImport } from './routes/baseball-stats'
-import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
-import { Route as AverageWeightByAgeRouteImport } from './routes/average-weight-by-age'
-import { Route as AverageVerticalJumpByAgeRouteImport } from './routes/average-vertical-jump-by-age'
-import { Route as AverageThrowingVelocityByAgeRouteImport } from './routes/average-throwing-velocity-by-age'
-import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
-import { Route as AverageHeightByAgeRouteImport } from './routes/average-height-by-age'
-import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
-import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
-import { Route as Average60YardDashByAgeRouteImport } from './routes/average-60-yard-dash-by-age'
-import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
-import { Route as CalculatorsIndexRouteImport } from './routes/calculators.index'
-import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
-import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
-import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average-pitching-velocity.$age'
-import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
-import { Route as AuthenticatedTeamComparisonRouteImport } from './routes/_authenticated/team-comparison'
-import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
-import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
-import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedMetricsRouteImport } from './routes/_authenticated/metrics'
-import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthCallbackRouteImport } from './routes/auth-callback'
+import { Route as Average60YardDashByAgeRouteImport } from './routes/average-60-yard-dash-by-age'
+import { Route as AverageBatSpeedByAgeRouteImport } from './routes/average-bat-speed-by-age'
+import { Route as AverageExitVelocityByAgeRouteImport } from './routes/average-exit-velocity-by-age'
+import { Route as AverageHeightByAgeRouteImport } from './routes/average-height-by-age'
+import { Route as AveragePopTimeByAgeRouteImport } from './routes/average-pop-time-by-age'
+import { Route as AverageThrowingVelocityByAgeRouteImport } from './routes/average-throwing-velocity-by-age'
+import { Route as AverageVerticalJumpByAgeRouteImport } from './routes/average-vertical-jump-by-age'
+import { Route as AverageWeightByAgeRouteImport } from './routes/average-weight-by-age'
+import { Route as BaseballNutritionRouteImport } from './routes/baseball-nutrition'
+import { Route as BaseballStatsRouteImport } from './routes/baseball-stats'
+import { Route as BaseballStrengthTrainingRouteImport } from './routes/baseball-strength-training'
+import { Route as BaseballWorkoutPlansRouteImport } from './routes/baseball-workout-plans'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as HowToIncreaseExitVelocityRouteImport } from './routes/how-to-increase-exit-velocity'
+import { Route as HowToThrowHarderRouteImport } from './routes/how-to-throw-harder'
+import { Route as LeaderboardsRouteImport } from './routes/leaderboards'
+import { Route as PitchingVelocityByAgeRouteImport } from './routes/pitching-velocity-by-age'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
+import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedGoalsRouteImport } from './routes/_authenticated/goals'
+import { Route as AuthenticatedMetricsRouteImport } from './routes/_authenticated/metrics'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
+import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
+import { Route as AuthenticatedTeamComparisonRouteImport } from './routes/_authenticated/team-comparison'
+import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
+import { Route as AveragePitchingVelocityAgeRouteImport } from './routes/average-pitching-velocity.$age'
+import { Route as CalculatorsIndexRouteImport } from './routes/calculators.index'
+import { Route as CalculatorsSlugRouteImport } from './routes/calculators.$slug'
+import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
+import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 
-const TeamsRoute = TeamsRouteImport.update({
-  id: '/teams',
-  path: '/teams',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SearchRoute = SearchRouteImport.update({
-  id: '/search',
-  path: '/search',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth-callback',
+  path: '/auth-callback',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PitchingVelocityByAgeRoute = PitchingVelocityByAgeRouteImport.update({
-  id: '/pitching-velocity-by-age',
-  path: '/pitching-velocity-by-age',
+const Average60YardDashByAgeRoute = Average60YardDashByAgeRouteImport.update({
+  id: '/average-60-yard-dash-by-age',
+  path: '/average-60-yard-dash-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LeaderboardsRoute = LeaderboardsRouteImport.update({
-  id: '/leaderboards',
-  path: '/leaderboards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToThrowHarderRoute = HowToThrowHarderRouteImport.update({
-  id: '/how-to-throw-harder',
-  path: '/how-to-throw-harder',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToIncreaseExitVelocityRoute =
-  HowToIncreaseExitVelocityRouteImport.update({
-    id: '/how-to-increase-exit-velocity',
-    path: '/how-to-increase-exit-velocity',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const FeaturesRoute = FeaturesRouteImport.update({
-  id: '/features',
-  path: '/features',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseballWorkoutPlansRoute = BaseballWorkoutPlansRouteImport.update({
-  id: '/baseball-workout-plans',
-  path: '/baseball-workout-plans',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseballStrengthTrainingRoute =
-  BaseballStrengthTrainingRouteImport.update({
-    id: '/baseball-strength-training',
-    path: '/baseball-strength-training',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const BaseballStatsRoute = BaseballStatsRouteImport.update({
-  id: '/baseball-stats',
-  path: '/baseball-stats',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
-  id: '/baseball-nutrition',
-  path: '/baseball-nutrition',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AverageWeightByAgeRoute = AverageWeightByAgeRouteImport.update({
-  id: '/average-weight-by-age',
-  path: '/average-weight-by-age',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AverageVerticalJumpByAgeRoute =
-  AverageVerticalJumpByAgeRouteImport.update({
-    id: '/average-vertical-jump-by-age',
-    path: '/average-vertical-jump-by-age',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AverageThrowingVelocityByAgeRoute =
-  AverageThrowingVelocityByAgeRouteImport.update({
-    id: '/average-throwing-velocity-by-age',
-    path: '/average-throwing-velocity-by-age',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AveragePopTimeByAgeRoute = AveragePopTimeByAgeRouteImport.update({
-  id: '/average-pop-time-by-age',
-  path: '/average-pop-time-by-age',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AverageHeightByAgeRoute = AverageHeightByAgeRouteImport.update({
-  id: '/average-height-by-age',
-  path: '/average-height-by-age',
+const AverageBatSpeedByAgeRoute = AverageBatSpeedByAgeRouteImport.update({
+  id: '/average-bat-speed-by-age',
+  path: '/average-bat-speed-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AverageExitVelocityByAgeRoute =
@@ -158,64 +88,153 @@ const AverageExitVelocityByAgeRoute =
     path: '/average-exit-velocity-by-age',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AverageBatSpeedByAgeRoute = AverageBatSpeedByAgeRouteImport.update({
-  id: '/average-bat-speed-by-age',
-  path: '/average-bat-speed-by-age',
+const AverageHeightByAgeRoute = AverageHeightByAgeRouteImport.update({
+  id: '/average-height-by-age',
+  path: '/average-height-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Average60YardDashByAgeRoute = Average60YardDashByAgeRouteImport.update({
-  id: '/average-60-yard-dash-by-age',
-  path: '/average-60-yard-dash-by-age',
+const AveragePopTimeByAgeRoute = AveragePopTimeByAgeRouteImport.update({
+  id: '/average-pop-time-by-age',
+  path: '/average-pop-time-by-age',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/auth-callback',
-  path: '/auth-callback',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
-  id: '/resources/',
-  path: '/resources/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalculatorsIndexRoute = CalculatorsIndexRouteImport.update({
-  id: '/calculators/',
-  path: '/calculators/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
-  id: '/resources/$slug',
-  path: '/resources/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalculatorsSlugRoute = CalculatorsSlugRouteImport.update({
-  id: '/calculators/$slug',
-  path: '/calculators/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AveragePitchingVelocityAgeRoute =
-  AveragePitchingVelocityAgeRouteImport.update({
-    id: '/average-pitching-velocity/$age',
-    path: '/average-pitching-velocity/$age',
+const AverageThrowingVelocityByAgeRoute =
+  AverageThrowingVelocityByAgeRouteImport.update({
+    id: '/average-throwing-velocity-by-age',
+    path: '/average-throwing-velocity-by-age',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
-  id: '/training',
-  path: '/training',
+const AverageVerticalJumpByAgeRoute =
+  AverageVerticalJumpByAgeRouteImport.update({
+    id: '/average-vertical-jump-by-age',
+    path: '/average-vertical-jump-by-age',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AverageWeightByAgeRoute = AverageWeightByAgeRouteImport.update({
+  id: '/average-weight-by-age',
+  path: '/average-weight-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseballNutritionRoute = BaseballNutritionRouteImport.update({
+  id: '/baseball-nutrition',
+  path: '/baseball-nutrition',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseballStatsRoute = BaseballStatsRouteImport.update({
+  id: '/baseball-stats',
+  path: '/baseball-stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseballStrengthTrainingRoute =
+  BaseballStrengthTrainingRouteImport.update({
+    id: '/baseball-strength-training',
+    path: '/baseball-strength-training',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BaseballWorkoutPlansRoute = BaseballWorkoutPlansRouteImport.update({
+  id: '/baseball-workout-plans',
+  path: '/baseball-workout-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToIncreaseExitVelocityRoute =
+  HowToIncreaseExitVelocityRouteImport.update({
+    id: '/how-to-increase-exit-velocity',
+    path: '/how-to-increase-exit-velocity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToThrowHarderRoute = HowToThrowHarderRouteImport.update({
+  id: '/how-to-throw-harder',
+  path: '/how-to-throw-harder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardsRoute = LeaderboardsRouteImport.update({
+  id: '/leaderboards',
+  path: '/leaderboards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PitchingVelocityByAgeRoute = PitchingVelocityByAgeRouteImport.update({
+  id: '/pitching-velocity-by-age',
+  path: '/pitching-velocity-by-age',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamsRoute = TeamsRouteImport.update({
+  id: '/teams',
+  path: '/teams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
+  id: '/charts',
+  path: '/charts',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGoalsRoute = AuthenticatedGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMetricsRoute = AuthenticatedMetricsRouteImport.update({
+  id: '/metrics',
+  path: '/metrics',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
+  id: '/records',
+  path: '/records',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTeamComparisonRoute =
@@ -224,55 +243,36 @@ const AuthenticatedTeamComparisonRoute =
     path: '/team-comparison',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
-  id: '/team',
-  path: '/team',
+const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const AveragePitchingVelocityAgeRoute =
+  AveragePitchingVelocityAgeRouteImport.update({
+    id: '/average-pitching-velocity/$age',
+    path: '/average-pitching-velocity/$age',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculatorsIndexRoute = CalculatorsIndexRouteImport.update({
+  id: '/calculators/',
+  path: '/calculators/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
-  id: '/records',
-  path: '/records',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const CalculatorsSlugRoute = CalculatorsSlugRouteImport.update({
+  id: '/calculators/$slug',
+  path: '/calculators/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
+  id: '/resources/',
+  path: '/resources/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMetricsRoute = AuthenticatedMetricsRouteImport.update({
-  id: '/metrics',
-  path: '/metrics',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedGoalsRoute = AuthenticatedGoalsRouteImport.update({
-  id: '/goals',
-  path: '/goals',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
-  id: '/coach',
-  path: '/coach',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
-  id: '/charts',
-  path: '/charts',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
+  id: '/resources/$slug',
+  path: '/resources/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -581,172 +581,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/teams': {
-      id: '/teams'
-      path: '/teams'
-      fullPath: '/teams'
-      preLoaderRoute: typeof TeamsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pitching-velocity-by-age': {
-      id: '/pitching-velocity-by-age'
-      path: '/pitching-velocity-by-age'
-      fullPath: '/pitching-velocity-by-age'
-      preLoaderRoute: typeof PitchingVelocityByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/leaderboards': {
-      id: '/leaderboards'
-      path: '/leaderboards'
-      fullPath: '/leaderboards'
-      preLoaderRoute: typeof LeaderboardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-throw-harder': {
-      id: '/how-to-throw-harder'
-      path: '/how-to-throw-harder'
-      fullPath: '/how-to-throw-harder'
-      preLoaderRoute: typeof HowToThrowHarderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-increase-exit-velocity': {
-      id: '/how-to-increase-exit-velocity'
-      path: '/how-to-increase-exit-velocity'
-      fullPath: '/how-to-increase-exit-velocity'
-      preLoaderRoute: typeof HowToIncreaseExitVelocityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/features': {
-      id: '/features'
-      path: '/features'
-      fullPath: '/features'
-      preLoaderRoute: typeof FeaturesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/baseball-workout-plans': {
-      id: '/baseball-workout-plans'
-      path: '/baseball-workout-plans'
-      fullPath: '/baseball-workout-plans'
-      preLoaderRoute: typeof BaseballWorkoutPlansRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/baseball-strength-training': {
-      id: '/baseball-strength-training'
-      path: '/baseball-strength-training'
-      fullPath: '/baseball-strength-training'
-      preLoaderRoute: typeof BaseballStrengthTrainingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/baseball-stats': {
-      id: '/baseball-stats'
-      path: '/baseball-stats'
-      fullPath: '/baseball-stats'
-      preLoaderRoute: typeof BaseballStatsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/baseball-nutrition': {
-      id: '/baseball-nutrition'
-      path: '/baseball-nutrition'
-      fullPath: '/baseball-nutrition'
-      preLoaderRoute: typeof BaseballNutritionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-weight-by-age': {
-      id: '/average-weight-by-age'
-      path: '/average-weight-by-age'
-      fullPath: '/average-weight-by-age'
-      preLoaderRoute: typeof AverageWeightByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-vertical-jump-by-age': {
-      id: '/average-vertical-jump-by-age'
-      path: '/average-vertical-jump-by-age'
-      fullPath: '/average-vertical-jump-by-age'
-      preLoaderRoute: typeof AverageVerticalJumpByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-throwing-velocity-by-age': {
-      id: '/average-throwing-velocity-by-age'
-      path: '/average-throwing-velocity-by-age'
-      fullPath: '/average-throwing-velocity-by-age'
-      preLoaderRoute: typeof AverageThrowingVelocityByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-pop-time-by-age': {
-      id: '/average-pop-time-by-age'
-      path: '/average-pop-time-by-age'
-      fullPath: '/average-pop-time-by-age'
-      preLoaderRoute: typeof AveragePopTimeByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-height-by-age': {
-      id: '/average-height-by-age'
-      path: '/average-height-by-age'
-      fullPath: '/average-height-by-age'
-      preLoaderRoute: typeof AverageHeightByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-exit-velocity-by-age': {
-      id: '/average-exit-velocity-by-age'
-      path: '/average-exit-velocity-by-age'
-      fullPath: '/average-exit-velocity-by-age'
-      preLoaderRoute: typeof AverageExitVelocityByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-bat-speed-by-age': {
-      id: '/average-bat-speed-by-age'
-      path: '/average-bat-speed-by-age'
-      fullPath: '/average-bat-speed-by-age'
-      preLoaderRoute: typeof AverageBatSpeedByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/average-60-yard-dash-by-age': {
-      id: '/average-60-yard-dash-by-age'
-      path: '/average-60-yard-dash-by-age'
-      fullPath: '/average-60-yard-dash-by-age'
-      preLoaderRoute: typeof Average60YardDashByAgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth-callback': {
-      id: '/auth-callback'
-      path: '/auth-callback'
-      fullPath: '/auth-callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -756,116 +595,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources/': {
-      id: '/resources/'
-      path: '/resources'
-      fullPath: '/resources/'
-      preLoaderRoute: typeof ResourcesIndexRouteImport
+    '/auth-callback': {
+      id: '/auth-callback'
+      path: '/auth-callback'
+      fullPath: '/auth-callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/calculators/': {
-      id: '/calculators/'
-      path: '/calculators'
-      fullPath: '/calculators/'
-      preLoaderRoute: typeof CalculatorsIndexRouteImport
+    '/average-60-yard-dash-by-age': {
+      id: '/average-60-yard-dash-by-age'
+      path: '/average-60-yard-dash-by-age'
+      fullPath: '/average-60-yard-dash-by-age'
+      preLoaderRoute: typeof Average60YardDashByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources/$slug': {
-      id: '/resources/$slug'
-      path: '/resources/$slug'
-      fullPath: '/resources/$slug'
-      preLoaderRoute: typeof ResourcesSlugRouteImport
+    '/average-bat-speed-by-age': {
+      id: '/average-bat-speed-by-age'
+      path: '/average-bat-speed-by-age'
+      fullPath: '/average-bat-speed-by-age'
+      preLoaderRoute: typeof AverageBatSpeedByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/calculators/$slug': {
-      id: '/calculators/$slug'
-      path: '/calculators/$slug'
-      fullPath: '/calculators/$slug'
-      preLoaderRoute: typeof CalculatorsSlugRouteImport
+    '/average-exit-velocity-by-age': {
+      id: '/average-exit-velocity-by-age'
+      path: '/average-exit-velocity-by-age'
+      fullPath: '/average-exit-velocity-by-age'
+      preLoaderRoute: typeof AverageExitVelocityByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/average-pitching-velocity/$age': {
-      id: '/average-pitching-velocity/$age'
-      path: '/average-pitching-velocity/$age'
-      fullPath: '/average-pitching-velocity/$age'
-      preLoaderRoute: typeof AveragePitchingVelocityAgeRouteImport
+    '/average-height-by-age': {
+      id: '/average-height-by-age'
+      path: '/average-height-by-age'
+      fullPath: '/average-height-by-age'
+      preLoaderRoute: typeof AverageHeightByAgeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/training': {
-      id: '/_authenticated/training'
-      path: '/training'
-      fullPath: '/training'
-      preLoaderRoute: typeof AuthenticatedTrainingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/average-pop-time-by-age': {
+      id: '/average-pop-time-by-age'
+      path: '/average-pop-time-by-age'
+      fullPath: '/average-pop-time-by-age'
+      preLoaderRoute: typeof AveragePopTimeByAgeRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/team-comparison': {
-      id: '/_authenticated/team-comparison'
-      path: '/team-comparison'
-      fullPath: '/team-comparison'
-      preLoaderRoute: typeof AuthenticatedTeamComparisonRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/average-throwing-velocity-by-age': {
+      id: '/average-throwing-velocity-by-age'
+      path: '/average-throwing-velocity-by-age'
+      fullPath: '/average-throwing-velocity-by-age'
+      preLoaderRoute: typeof AverageThrowingVelocityByAgeRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/team': {
-      id: '/_authenticated/team'
-      path: '/team'
-      fullPath: '/team'
-      preLoaderRoute: typeof AuthenticatedTeamRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/average-vertical-jump-by-age': {
+      id: '/average-vertical-jump-by-age'
+      path: '/average-vertical-jump-by-age'
+      fullPath: '/average-vertical-jump-by-age'
+      preLoaderRoute: typeof AverageVerticalJumpByAgeRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/average-weight-by-age': {
+      id: '/average-weight-by-age'
+      path: '/average-weight-by-age'
+      fullPath: '/average-weight-by-age'
+      preLoaderRoute: typeof AverageWeightByAgeRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/records': {
-      id: '/_authenticated/records'
-      path: '/records'
-      fullPath: '/records'
-      preLoaderRoute: typeof AuthenticatedRecordsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/baseball-nutrition': {
+      id: '/baseball-nutrition'
+      path: '/baseball-nutrition'
+      fullPath: '/baseball-nutrition'
+      preLoaderRoute: typeof BaseballNutritionRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/progress': {
-      id: '/_authenticated/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof AuthenticatedProgressRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/baseball-stats': {
+      id: '/baseball-stats'
+      path: '/baseball-stats'
+      fullPath: '/baseball-stats'
+      preLoaderRoute: typeof BaseballStatsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/baseball-strength-training': {
+      id: '/baseball-strength-training'
+      path: '/baseball-strength-training'
+      fullPath: '/baseball-strength-training'
+      preLoaderRoute: typeof BaseballStrengthTrainingRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/metrics': {
-      id: '/_authenticated/metrics'
-      path: '/metrics'
-      fullPath: '/metrics'
-      preLoaderRoute: typeof AuthenticatedMetricsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/baseball-workout-plans': {
+      id: '/baseball-workout-plans'
+      path: '/baseball-workout-plans'
+      fullPath: '/baseball-workout-plans'
+      preLoaderRoute: typeof BaseballWorkoutPlansRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/goals': {
-      id: '/_authenticated/goals'
-      path: '/goals'
-      fullPath: '/goals'
-      preLoaderRoute: typeof AuthenticatedGoalsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-increase-exit-velocity': {
+      id: '/how-to-increase-exit-velocity'
+      path: '/how-to-increase-exit-velocity'
+      fullPath: '/how-to-increase-exit-velocity'
+      preLoaderRoute: typeof HowToIncreaseExitVelocityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-throw-harder': {
+      id: '/how-to-throw-harder'
+      path: '/how-to-throw-harder'
+      fullPath: '/how-to-throw-harder'
+      preLoaderRoute: typeof HowToThrowHarderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboards': {
+      id: '/leaderboards'
+      path: '/leaderboards'
+      fullPath: '/leaderboards'
+      preLoaderRoute: typeof LeaderboardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pitching-velocity-by-age': {
+      id: '/pitching-velocity-by-age'
+      path: '/pitching-velocity-by-age'
+      fullPath: '/pitching-velocity-by-age'
+      preLoaderRoute: typeof PitchingVelocityByAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teams': {
+      id: '/teams'
+      path: '/teams'
+      fullPath: '/teams'
+      preLoaderRoute: typeof TeamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/charts': {
+      id: '/_authenticated/charts'
+      path: '/charts'
+      fullPath: '/charts'
+      preLoaderRoute: typeof AuthenticatedChartsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/coach': {
@@ -875,12 +777,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCoachRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/charts': {
-      id: '/_authenticated/charts'
-      path: '/charts'
-      fullPath: '/charts'
-      preLoaderRoute: typeof AuthenticatedChartsRouteImport
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/goals': {
+      id: '/_authenticated/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof AuthenticatedGoalsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/metrics': {
+      id: '/_authenticated/metrics'
+      path: '/metrics'
+      fullPath: '/metrics'
+      preLoaderRoute: typeof AuthenticatedMetricsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/progress': {
+      id: '/_authenticated/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AuthenticatedProgressRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/records': {
+      id: '/_authenticated/records'
+      path: '/records'
+      fullPath: '/records'
+      preLoaderRoute: typeof AuthenticatedRecordsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/team-comparison': {
+      id: '/_authenticated/team-comparison'
+      path: '/team-comparison'
+      fullPath: '/team-comparison'
+      preLoaderRoute: typeof AuthenticatedTeamComparisonRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/training': {
+      id: '/_authenticated/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof AuthenticatedTrainingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/average-pitching-velocity/$age': {
+      id: '/average-pitching-velocity/$age'
+      path: '/average-pitching-velocity/$age'
+      fullPath: '/average-pitching-velocity/$age'
+      preLoaderRoute: typeof AveragePitchingVelocityAgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators/': {
+      id: '/calculators/'
+      path: '/calculators'
+      fullPath: '/calculators/'
+      preLoaderRoute: typeof CalculatorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators/$slug': {
+      id: '/calculators/$slug'
+      path: '/calculators/$slug'
+      fullPath: '/calculators/$slug'
+      preLoaderRoute: typeof CalculatorsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/': {
+      id: '/resources/'
+      path: '/resources'
+      fullPath: '/resources/'
+      preLoaderRoute: typeof ResourcesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/$slug': {
+      id: '/resources/$slug'
+      path: '/resources/$slug'
+      fullPath: '/resources/$slug'
+      preLoaderRoute: typeof ResourcesSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }

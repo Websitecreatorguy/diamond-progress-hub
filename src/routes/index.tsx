@@ -61,6 +61,16 @@ function HomePage() {
   return (
     <MarketingLayout>
       <Hero />
+      
+<div className="flex justify-center py-6">
+  <a
+    href="/arcade/"
+    className="rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:scale-105 hover:bg-blue-700"
+  >
+    🎮 Play Games
+  </a>
+</div>
+
       <AdBanner slot="6013830221" className="mx-auto max-w-6xl px-4 py-6 sm:px-6" />
       <TrustBar />
       <Features />

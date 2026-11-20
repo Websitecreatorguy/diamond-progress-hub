@@ -107,7 +107,16 @@ export function AppShell({
                 {label}
               </Link>
             ))}
+            
+<a
+  href="/arcade/"
+  className="rounded-full bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700"
+>
+  🎮 Play Games
+</a>
+
           </nav>
+          
 
           <div className="flex shrink-0 items-center gap-2">
             <Button

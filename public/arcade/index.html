@@ -1,1 +1,173 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diamond Arcade | Secret Zone</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 6%;
+      background: #111a30;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 21px;
+      color: #8b9cff;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 70px);
+      margin: 0;
+      background: linear-gradient(90deg, #59d9ff, #a78bfa);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #b3c1db;
+      margin: 18px 0 45px;
+      font-size: 18px;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .game-card {
+      background: #18233d;
+      border: 1px solid #324363;
+      border-radius: 18px;
+      padding: 35px 20px;
+      text-decoration: none;
+      color: white;
+      transition: 0.2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: #8b9cff;
+      box-shadow: 0 10px 35px #0005;
+    }
+
+    .emoji { font-size: 48px; }
+
+    .game-card h2 { margin-bottom: 8px; }
+
+    .game-card p {
+      color: #aebdd5;
+      font-size: 14px;
+    }
+
+    .play {
+      display: inline-block;
+      margin-top: 16px;
+      color: #84d9ff;
+      font-weight: bold;
+    }
+
+    footer {
+      color: #7787a4;
+      padding: 30px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .games { grid-template-columns: 1fr; }
+      header { padding: 20px; }
+      main { padding: 55px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">💎 DIAMOND ARCADE</div>
+    <a class="back" href="/">← Back to Baseball</a>
+  </header>
+
+  <main>
+    <div>🎮 SECRET ZONE UNLOCKED</div>
+    <h1>DIAMOND ARCADE</h1>
+    <p class="subtitle">
+      Your secret gateway to awesome browser games.
+      Choose your destination!
+    </p>
+
+    <div class="games">
+      <a class="game-card"
+         href="https://www.crazygames.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="emoji">🏎️</div>
+        <h2>CrazyGames</h2>
+        <p>Racing, action, multiplayer and more.</p>
+        <span class="play">PLAY NOW ↗</span>
+      </a>
+
+      <a class="game-card"
+         href="https://www.coolmathgames.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="emoji">🧩</div>
+        <h2>Coolmath Games</h2>
+        <p>Puzzles, strategy, and skill games.</p>
+        <span class="play">PLAY NOW ↗</span>
+      </a>
+
+      <a class="game-card"
+         href="https://poki.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="emoji">🕹️</div>
+        <h2>Poki</h2>
+        <p>Discover tons of free browser games.</p>
+        <span class="play">PLAY NOW ↗</span>
+      </a>
+
+      <a class="game-card"
+         href="https://www.hoodamath.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="emoji">🧠</div>
+        <h2>Hooda Math</h2>
+        <p>Escape rooms, logic, and puzzle games.</p>
+        <span class="play">PLAY NOW ↗</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Diamond Arcade is not affiliated with the
+    linked gaming websites.
+  </footer>
+</body>
+</html>
+

@@ -81,6 +81,15 @@ export function AppShell({
           <Link to="/dashboard" className="flex shrink-0 items-center">
             <Logo size={34} />
           </Link>
+<a
+  href="/arcade/"
+  title="Secret Arcade"
+  aria-label="Open Secret Arcade"
+  className="ml-2 rounded-full p-2 text-sm opacity-40 transition-all hover:scale-125 hover:opacity-100"
+>
+  🎮
+</a>
+
 
           <nav className="hidden flex-1 items-center justify-center gap-0.5 xl:flex">
             {items.slice(0, 8).map(({ to, label, icon: Icon }) => (
